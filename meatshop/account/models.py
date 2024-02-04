@@ -28,3 +28,12 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    city = models.Choices([('abyek', 'آبیک')])
+    neighbourhood = models.CharField(max_length=50)
+    street = models.CharField(max_length=50)
+    alley = models.CharField(max_length=50)
+    building = models.CharField(max_length=50)
+    
