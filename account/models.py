@@ -30,8 +30,12 @@ class User(AbstractBaseUser):
 
 
 class Address(models.Model):
+    CITY_CHOICES = [
+        ('abyek', 'آبیک')
+    ]
+
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    city = models.Choices([('abyek', 'آبیک')])
+    city = models.CharField(max_length=50, choices=CITY_CHOICES)    
     neighbourhood = models.CharField(max_length=50)
     street = models.CharField(max_length=50)
     alley = models.CharField(max_length=50)
