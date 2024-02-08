@@ -87,3 +87,17 @@ class OtpConfirm(View):
             del request.session['user_register_info']
             return render(request, self.success_temp)
         return render(request, self.otp_temp, {'alert': 'کد یکبار مصرف وارد شده صحیح نمی باشد'})
+
+
+class Login(View):
+    log_temp = 'inc/login.html'
+
+    def get(self, request):
+        return render(request, self.log_temp)
+    
+
+class About(View):
+    about_temp = 'about.html'
+
+    def get(self, request):
+        return render(request, self.about_temp)
