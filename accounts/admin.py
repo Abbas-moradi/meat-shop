@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from accounts.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import Group
-from accounts.models import User
+from accounts.models import User, OtpCode
 
 
 class UserAdmin(BaseUserAdmin):
@@ -25,6 +25,11 @@ class UserAdmin(BaseUserAdmin):
 
     ordering = ('full_name',)
     filter_horizontal = ()
+
+
+@admin.register(OtpCode)
+class OtpCodeAdmin(admin.ModelAdmin):
+    list_display = ('phone_number', 'code', 'email', 'created')
 
 
 admin.site.unregister(Group)
