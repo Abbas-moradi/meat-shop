@@ -42,4 +42,15 @@ class Address(models.Model):
     building = models.CharField(max_length=50)
 
     def __str__(self) -> str:
-        return f'{self.city}-{self.neighbourhood}-{self.street}-{self.alley}-{self.building}'        
+        return f'{self.city}-{self.neighbourhood}-{self.street}-{self.alley}-{self.building}'
+
+
+class OtpCode(models.Model):
+    phone_number = models.CharField(max_length = 13)
+    email = models.EmailField()
+    code = models.PositiveSmallIntegerField()
+    created = models.DateTimeField(auto_now_add = True) 
+
+    def __str__(self) -> str:
+        return f'{self.phone_number}-{self.email}-{self.code}'
+    
