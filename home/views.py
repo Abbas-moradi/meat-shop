@@ -97,6 +97,47 @@ class Login(View):
         return render(request, self.log_temp)
     
 
+class Forgot(View):
+    forgot_temp = 'inc/forgot-pass.html'
+    login_temp = 'inc/login.html'
+
+    def get(self, request):
+        phone = request.GET['phone']
+        user_exists = User.objects.filter(phone_number=phone).exists()
+        if not user_exists:
+            return render(request, self.login_temp, {'alert': 'کاربری با اطلاعات وارد شده در سایت ثبت نام نکرده است'})
+        otp_code = random.randint(100000, 999999)
+        OtpCode.objects.create(phone_number=phone, email='forgot@mail.com', code=otp_code)
+        request.session['user_forgot_password'] = {
+            'user_phone': phone
+        }
+        return render(request, self.forgot_temp)
+
+    def post(self, request):
+        code = request.POST['code']
+        pass1 = request.POST['password1']
+        pass2 = request.POST['password2']
+
+        code_sent = OtpCode.objects.filter(phone_number=request.session['user_forgot_password']['user_phone']).values_list('code', flat=True).first()
+        user_phone = request.session['user_forgot_password']['user_phone']
+        user = User.objects.get(phone_number=user_phone)
+        code_exist = OtpCode.objects.filter(phone_number=request.session['user_forgot_password']['user_phone'],
+                                             email='forgot@mail.com').exists()
+        
+        if code_exist and int(code_sent)==int(code):
+            if str(pass1)==str(pass2):
+                user.set_password(pass2)
+                user.save()
+                OtpCode.objects.filter(phone_number=request.session['user_forgot_password']['user_phone']).delete()
+                del request.session['user_forgot_password']
+                return render(request, self.login_temp, {'alert': 'رمز با موفقیت تغییر کرد'})
+            else:
+                return render(request, self.forgot_temp, {'alert': 'رمز اول با تکرار رمز برابر نیست'})
+        else:
+            return render(request, self.forgot_temp, {'alert': 'کد وارد شده صحیح نیست و یا منقضی شده است'})
+
+
+
 class About(View):
     about_temp = 'about.html'
 

@@ -12,36 +12,28 @@
                     <div class="col-lg-6">
                         <div class="card shadow rounded-3">
                             <div class="card-body p-md-5">
-                                <p class="text-center text-success h4">صفحه ورود  <img src="{% static 'home/assets/favicon.png' %}" alt="عکس" style="height: 75px;"></p>
-                                <form method="post" action="">
+                                <p class="text-center text-success h4"> فراموشی رمز ورود  <img src="{% static 'home/assets/favicon.png' %}" alt="عکس" style="height: 75px;"></p>
+                                <form method="post" action="{% url 'home:forgot' %}">
                                     {% csrf_token %}
                                     <div class="mb-3" dir="rtl">
-                                        <label for="phone" class="form-label">تلفن</label>
                                         <div class="input-group" dir="rtl">
-                                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                                            <input type="tel" class="form-control" id="phone" placeholder="لطفاً تلفن خود را وارد کنید" dir="rtl">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input name="code" type="password" class="form-control" id="password" placeholder="لطفا کد ارسال شده به شماره همراه خود را وارد کنید" dir="rtl">
                                         </div>
                                     </div>
                                     <div class="mb-3" dir="rtl">
-                                        <label for="password" class="form-label">رمز عبور</label>
+                                        <div class="input-group" dir="rtl">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input name="password1" type="password" class="form-control" id="password" placeholder="لطفاً رمز عبور خود را وارد کنید" dir="rtl">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" dir="rtl">
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                            <input type="password" class="form-control" id="password" placeholder="لطفاً رمز عبور خود را وارد کنید">
+                                            <input name="password2" type="password" class="form-control" id="password" placeholder="لطفاً تکرار رمز عبور خود را وارد کنید">
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">ورود</button>
-                                    <hr class="my-4">
-                                </form>
-                                <form action="{% url 'home:forgot' %}" method="get">
-                                    {% csrf_token %}
-                                    <div class="mb-3" dir="rtl">
-                                        <label for="phone" class="form-label">شماره تلفن</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                            <input name="phone" type="phone" class="form-control" id="phone" placeholder="درصورت فراموشی رمز ورود، شماره تلفن خود را وارد کنید" required/>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-warning">فراموشی رمز</button>
+                                    <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
                                 </form>
                             </div>
                         </div>
@@ -50,7 +42,7 @@
             </div>
         </section>
         <!-- User Login End -->
-        
+
         {% if alert %}
         <div class="error-message">
           <script>
@@ -61,7 +53,7 @@
 
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy;  www.Qasaab.ir 2023</p></div>
         </footer>
 
         {% include 'footer.html' %}
