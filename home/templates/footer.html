@@ -39,37 +39,37 @@
 
     <!-- Section: Form -->
     <section class="">
-        <form action="">
-        <!--Grid row-->
-        <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="col-auto">
-            <p class="pt-2">
-                <strong>Sign up for our newsletter</strong>
-            </p>
-            </div>
-            <!--Grid column-->
+        <form action="" method="post">
+            {% csrf_token %}
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center">
+                <!--Grid column-->
+                <div class="col-auto">
+                <p class="pt-2 text-warning">
+                    <strong>برای دریافت آخرین قیمت ها ثبت نام کنید</strong>
+                </p>
+                </div>
+                <!--Grid column-->
 
-            <!--Grid column-->
-            <div class="col-md-5 col-12">
-            <!-- Email input -->
-            <div class="form-outline form-white mb-4">
-                <input type="email" id="form5Example2" class="form-control" />
-                <label class="form-label" for="form5Example2">Email address</label>
-            </div>
-            </div>
-            <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-5 col-12">
+                <!-- Email input -->
+                <div class="form-outline form-white mb-4">
+                    <input name="email" type="email" id="form5Example2" class="form-control" placeholder="آدرس ایمیل خود را وارد کنید"/>
+                </div>
+                </div>
+                <!--Grid column-->
 
-            <!--Grid column-->
-            <div class="col-auto">
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-outline-light mb-4">
-                Subscribe
-            </button>
+                <!--Grid column-->
+                <div class="col-auto">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-outline-light mb-4">
+                    ثبت ایمیل
+                </button>
+                </div>
+                <!--Grid column-->
             </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
+            <!--Grid row-->
         </form>
     </section>
     <!-- Section: Form -->
@@ -99,7 +99,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
      طراحی و پشتیبانی توسط :
-    <a class="text-white" href="https://github.com/Abbas-moradi" target="_blank"> تیم مدیریت دامیران</a>
+    <a class="text-white " href="https://github.com/Abbas-moradi" target="_blank" style="text-decoration: none;"> تیم مدیریت دامیران</a>
     </div>
     <!-- Copyright -->
 </footer>

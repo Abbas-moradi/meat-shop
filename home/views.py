@@ -84,6 +84,7 @@ class OtpConfirm(View):
                 full_name=user_full_name,
                 password=user_password
             )
+            OtpCode.objects.filter(phone_number=user_phone).delete()
             del request.session['user_register_info']
             return render(request, self.success_temp)
         return render(request, self.otp_temp, {'alert': 'کد یکبار مصرف وارد شده صحیح نمی باشد'})
