@@ -3,6 +3,7 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(max_length = 100)
+    slug = models.SlugField(unique=True)
     description = models.TextField()
     price = models.PositiveIntegerField()
     inventory = models.PositiveIntegerField()
@@ -23,7 +24,7 @@ class Product(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     pic = models.ImageField(upload_to='category/')
     created = models.DateTimeField(auto_now_add=True)
