@@ -13,6 +13,14 @@
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy;  www.Qasaab.ir 2023</p></div>
         </footer>
 
+        {% if alert %}
+        <div class="error-message">
+          <script>
+              alert("{{ alert }}");
+          </script>
+        </div>
+        {% endif %}
+
         {% include 'footer.html' %}
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

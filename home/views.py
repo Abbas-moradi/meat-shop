@@ -3,6 +3,8 @@ from django.views import View
 from accounts.models import User, OtpCode
 from django.utils import timezone
 from product.models import Category, Product
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 import random
 
 class Home(View):
@@ -145,3 +147,12 @@ class About(View):
 
     def get(self, request):
         return render(request, self.about_temp)
+    
+
+class UserLogout(LoginRequiredMixin, View):
+    temp = 'index.html'
+
+    def get(self, request):
+        user = request.user.name
+        logout(request)
+        return render(request, self.temp, {'alert': f'.کاربر محترم، خروج شما با موفقیت انجام شد'})
