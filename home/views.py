@@ -106,7 +106,7 @@ class Login(View):
                             password=request.POST['password'])
         if user is not None:
             login(request, user)
-            return render(request, self.home_temp, {'alert': 'ورود به سایت، شما با موفقیت وارد سایت شدید.'})
+            return redirect('home:home')
         return render(request, self.log_temp, {'alert': 'شماره تلفن و یا رمز وارد شده معتبر نیست.'})
 
     
@@ -163,6 +163,5 @@ class UserLogout(LoginRequiredMixin, View):
     temp = 'index.html'
 
     def get(self, request):
-        user = request.user.name
         logout(request)
-        return render(request, self.temp, {'alert': f'.کاربر محترم، خروج شما با موفقیت انجام شد'})
+        return redirect('home:home')

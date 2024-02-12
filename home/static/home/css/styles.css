@@ -10,6 +10,22 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ .welcome-text {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border-bottom: 2px solid #000000;
+  animation: slideIn 3s ease-in-out;
+}
+
+@keyframes slideIn {
+  0% { top: -50px; opacity: 0; }
+  100% { top: 0; opacity: 1; }
+}
+
 
  .image-container {
   background-image: url('F:/meat shop/startbootstrap-shop-homepage-gh-pages/startbootstrap-shop-homepage-gh-pages/assets/img/site header banner.jpg');
