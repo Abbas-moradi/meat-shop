@@ -4169,6 +4169,16 @@ textarea.form-control-lg {
 }
 
 .card {
+  transition: box-shadow 0.3s ease-in-out; /* ترانزیشن برای افکت روان */
+  box-shadow: 0 0.5rem 1rem rgba(255, 0, 0, 0); /* سایه ابتدایی که نمایش داده نمی‌شود */
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(255, 0, 0, 0.2); /* سایه با افکت وقتی ماوس روی کادر هاور می‌کند */
+}
+
+
+.card {
   --bs-card-spacer-y: 1rem;
   --bs-card-spacer-x: 1rem;
   --bs-card-title-spacer-y: 0.5rem;

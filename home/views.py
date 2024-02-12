@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect
 from django.views import View
 from accounts.models import User, OtpCode
 from django.utils import timezone
+from product.models import Category, Product
 import random
 
 class Home(View):
     home_temp = 'index.html'
     def get(self, request):
         temp = self.home_temp
-        return render(request, temp)
+        products = Product.objects.filter(status=True)
+        return render(request, temp, {'products': products})
     
     def post(self, request):
         pass
