@@ -96,9 +96,19 @@ class OtpConfirm(View):
 
 class Login(View):
     log_temp = 'inc/login.html'
+    home_temp = 'index.html'
 
     def get(self, request):
         return render(request, self.log_temp)
+    
+    def post(self, request):
+        user = authenticate(request, phone_number=request.POST['phone'], 
+                            password=request.POST['password'])
+        if user is not None:
+            login(request, user)
+            return render(request, self.home_temp, {'alert': 'ورود به سایت، شما با موفقیت وارد سایت شدید.'})
+        return render(request, self.log_temp, {'alert': 'شماره تلفن و یا رمز وارد شده معتبر نیست.'})
+
     
 
 class Forgot(View):
