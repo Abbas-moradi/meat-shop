@@ -8,6 +8,7 @@
         <!-- Product Details section -->
         <section class="py-5" dir="rtl">
             <div class="container px-4 px-lg-5 my-5">
+                <form action="{% url 'order:card_add' product.id %}" method="post">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.pic.url }}" alt="..." style="width: 600;"/></div>
                     <div class="col-md-6">
@@ -21,7 +22,7 @@
                         <p class="lead fw-bolder">قیمت نهایی محصول {{ product.price }}  تومان</p>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                                 <i class="bi-cart-fill me-1"></i>
                                 افزودن به سبد خرید
                             </button>
@@ -29,6 +30,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </section>
         <!-- Product Details section End -->
