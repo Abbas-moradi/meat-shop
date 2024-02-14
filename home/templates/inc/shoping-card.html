@@ -14,7 +14,7 @@
             <div class="container">
             <div class="row w-100">
                 <div class="col-lg-12 col-md-12 col-12">
-                    <h3 class="display-5 mb-2 text-center">کارت خرید شما</h3>
+                    <h3 class="display-5 mb-2 text-center">سبد خرید {{ request.user.full_name }}</h3>
                     <p class="mb-5 text-center">
                         <i class="text-info font-weight-bold">3</i> تعداد اقلام کارت خرید شما</p>
                     <table id="shoppingCart" class="table table-condensed table-responsive">
@@ -121,7 +121,7 @@
                     <a href="catalog.html" class="btn btn-danger mb-4 btn-lg pl-5 pr-5">پرداخت فاکتور</a>
                 </div>
                 <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
-                    <a href="index.html" class="btn btn-danger mb-4 btn-lg pl-5 pr-5"><i class="fas fa-arrow-left mr-2"></i> ادامه خرید </a>
+                    <a href="{% url 'home:home' %}" class="btn btn-danger mb-4 btn-lg pl-5 pr-5"><i class="fas fa-arrow-left mr-2"></i> ادامه خرید </a>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Product Section Start -->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -8,10 +9,12 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <div class="card shadow rounded-3">
-                            <p class="text-center fw-bolder">فروشگاه گوشت دامیران</p>
+                            <a class="text-center fw-bolder btn">فروشگاه گوشت دامیران</a>
                             <div class="confirmation">
-                                <h2>محصولات امروز به فروش رسیده و ظرفیت تکمیل شده است.</h2>
+                                <h2 class="text-danger">محصولات امروز به فروش رسیده و ظرفیت تکمیل شده است.</h2>
+                                <img class="card-img-top" src="{% static 'home/assets/favicon.png' %}" style="width: 300px;"/>
                             </div>
+                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -19,12 +22,12 @@
         </section>
 
         <!-- Confirm Payment End -->
-        {% endif %}
-        <h4 class="fw-bolder text-center">محصولات فروشگاه</h4>
+        {% else %}
+        <h4 class="fw-bolder text-center">محصولات موجود در فروشگاه</h4>
         <hr class="my-4">
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             {% for product in products %}
-            <div class="col mb-5">
+            <div class="col mb-5" >
                 <div class="card h-100">
                     {% if product.economic %}
                     <!-- Sale badge-->
@@ -39,8 +42,8 @@
                             <!-- Product name-->
                             <a href="{{ product.get_absolute_url }}" class="fw-bolder h5" style="text-decoration: none;">{{ product.name }}</a><br>
                             <!-- Product price-->
-                            {{ product.price }} تومان <br>
-                            <p class="fw-bolder">{{ product.inventory }} مقدار باقیمانده</p>
+                            <p>قیمت هر کیلو {{ product.price }} تومان</p>
+                            <p class="fw-bolder">مقدار باقیمانده {{ product.inventory }} کیلو</p>
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -51,6 +54,7 @@
             </div>
             {% endfor %}
         </div>
+        {% endif %}
     </div>
 </section>
 <!-- Product Section End -->

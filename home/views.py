@@ -11,7 +11,7 @@ class Home(View):
     home_temp = 'index.html'
     def get(self, request):
         temp = self.home_temp
-        products = Product.objects.filter(status=True)
+        products = Product.objects.filter(status=True, inventory__gt=0)
         return render(request, temp, {'products': products})
     
     def post(self, request):
