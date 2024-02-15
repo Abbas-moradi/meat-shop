@@ -36,6 +36,12 @@ class Card:
         if quantity <= 0:
             del self.card[product_id]
         self.save()
+    
+    def delete(self, product):
+        product_id = str(product.id)
+        del self.card[product_id]
+        self.save()
+
 
     def save(self):
         self.session.modified = True

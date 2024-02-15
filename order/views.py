@@ -21,8 +21,20 @@ class ShopingCardUpdate(View):
         card = Card(request)
         product = get_object_or_404(Product, name=product)
         card.update(product, int(request.POST['quantity']))
-        messages.success(request, 'محصول شما با موفقیت بروز رسانی شد.')
+        messages.success(request, 'کارت خرید شما با موفقیت بروز رسانی شد.')
         return redirect('order:shoping_card')
+
+
+class RemoveItem(View):
+    card_temp = 'inc/shoping-card.html'
+
+    def post(self, request, product):
+        card = Card(request)
+        product = get_object_or_404(Product, name=product)
+        card.delete(product)
+        messages.success(request, 'محصول از سبد خرید شما حذف شد')
+        return redirect('order:shoping_card')
+
     
 
 class CardAddProduct(View):
