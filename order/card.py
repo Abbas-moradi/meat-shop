@@ -28,5 +28,14 @@ class Card:
         self.card[product_id]['quantity'] += quantity
         self.save()
 
+    def update(self, product, quantity):
+        product_id = str(product.id)
+        if product_id not in self.card:
+            self.card[product_id] = {'quantity': 0, 'price': str(product.price)}
+        self.card[product_id]['quantity'] = quantity
+        if quantity <= 0:
+            del self.card[product_id]
+        self.save()
+
     def save(self):
         self.session.modified = True

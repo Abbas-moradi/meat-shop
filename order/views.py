@@ -14,6 +14,17 @@ class ShopingCard(View):
         return render(request, self.card_temp, {'card': card})
     
 
+class ShopingCardUpdate(View):
+    card_temp = 'inc/shoping-card.html'
+
+    def post(self, request, product):
+        card = Card(request)
+        product = get_object_or_404(Product, name=product)
+        card.update(product, int(request.POST['quantity']))
+        messages.success(request, 'محصول شما با موفقیت بروز رسانی شد.')
+        return redirect('order:shoping_card')
+    
+
 class CardAddProduct(View):
     home_temp = 'index.html'
 

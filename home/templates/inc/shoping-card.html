@@ -33,7 +33,8 @@
                         </thead>
                         <tbody>
                             {% for item in card %}
-                            <form action="#">
+                            <form action="{% url 'order:shoping_card_update' item.product %}" method="post">
+                                {% csrf_token %}
                                 <tr>
                                     <td data-th="Product">
                                         <div class="row">
@@ -84,6 +85,15 @@
         </section>
         <!-- Shoping Card End-->
 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    <script>
+                        alert("{{ message }}");
+                    </script>
+                </div>
+            {% endfor %}
+        {% endif %}
        
         <!-- Footer-->
         <footer class="py-5 bg-dark">
