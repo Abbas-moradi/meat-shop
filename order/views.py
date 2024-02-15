@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from product.models import Product
 from django.views import View
+from .card import Card
 
 
 class ShopingCard(View):
@@ -7,14 +9,18 @@ class ShopingCard(View):
     home_temp = 'index.html'
 
     def get(self, request):
-        return render(request, self.card_temp)
+        card = Card(request)
+        return render(request, self.card_temp, {'card': card})
     
 
 class CardAddProduct(View):
-    temp = ''
+    home_temp = 'index.html'
 
     def get(self, request):
         pass
     
     def post(self, request, product_id):
-        pass
+        card = Card(request)
+        product = get_object_or_404(Product, id=product_id)
+        card.add(product, request.POST['quantity'])
+        return render(request, self.home_temp ,{'alert': 'محصول شما با موفقیت به سید خرید افزوده شد.'})
