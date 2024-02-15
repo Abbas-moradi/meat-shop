@@ -14,6 +14,8 @@ class Card:
         card = self.card.copy()
         for product in products:
             card[str(product.id)]['product'] = product
+            card[str(product.id)]['image'] = product.pic
+            card[str(product.id)]['category'] = product.category
         
         for item in card.values():
             item['total_price'] = int(item['price']) * item['quantity']

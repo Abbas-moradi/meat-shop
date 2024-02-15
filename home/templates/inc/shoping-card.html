@@ -32,34 +32,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td data-th="Product">
-                                    <div class="row">
-                                        <div class="col-md-3 text-left">
-                                            <img src="https://via.placeholder.com/100x100/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                            {% for item in card %}
+                            <form action="#">
+                                <tr>
+                                    <td data-th="Product">
+                                        <div class="row">
+                                            <div class="col-md-3 text-left">
+                                                <img src="{{ item.image.url }}" alt="عکس محصول" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                            </div>
+                                            <div class="col-md-9 text-left mt-sm-2">
+                                                <h4>{{ item.product }}</h4>
+                                                <p class="font-weight-light">دسته &amp; {{ item.category }}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-9 text-left mt-sm-2">
-                                            <h4>Product Name</h4>
-                                            <p class="font-weight-light">Brand &amp; Name</p>
+                                    </td>
+                                    <td data-th="Price">{{ item.price }}</td>
+                                    <td data-th="Quantity">
+                                        <input name="quantity" type="number" class="form-control form-control-sm text-center" value="{{ item.quantity }}">
+                                    </td>
+                                    <td data-th="Price">{{ item.total_price }}</td>
+                                    <td class="actions" data-th="">
+                                        <div class="text-right">
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit">
+                                                <i class="bi bi-play-fill"></i>
+                                            </button>
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
                                         </div>
-                                    </div>
-                                </td>
-                                <td data-th="Price">$49.00</td>
-                                <td data-th="Quantity">
-                                    <input name="quantity" type="number" class="form-control form-control-sm text-center" value="1">
-                                </td>
-                                <td data-th="Price">$49.00</td>
-                                <td class="actions" data-th="">
-                                    <div class="text-right">
-                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                                            <i class="bi bi-play-fill"></i>
-                                        </button>
-                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </form>
+                            {% endfor %}
                         </tbody>
                     </table>
                     <div class="float-right text-right" dir="rtl">
@@ -70,7 +74,7 @@
             </div>
             <div class="row mt-4 d-flex align-items-center">
                 <div class="col-sm-6 order-md-2 text-right">
-                    <a href="catalog.html" class="btn btn-success mb-4 btn pl-5 pr-5">صدور فاکتور</a>
+                    <a href="{% url 'order:receipt' %}" class="btn btn-success mb-4 btn pl-5 pr-5">صدور فاکتور</a>
                 </div>
                 <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
                     <a href="{% url 'home:home' %}" class="btn btn-primary mb-4 btn pl-5 pr-5"><i class="fas fa-arrow-left mr-2"></i> ادامه خرید </a>

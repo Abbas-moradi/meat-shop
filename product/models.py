@@ -8,6 +8,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.PositiveIntegerField()
     inventory = models.PositiveIntegerField()
+    number = models.PositiveSmallIntegerField(default=1)
     pic = models.ImageField(upload_to='product/')
     discount = models.PositiveSmallIntegerField()
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='products')
@@ -21,7 +22,7 @@ class Product(models.Model):
         ordering = ('created',)
     
     def __str__(self) -> str:
-        return f'{self.name}-{self.status}'
+        return self.name
 
     def get_absolute_url(self):
         return reverse('product:product_detail', args=[self.slug,])

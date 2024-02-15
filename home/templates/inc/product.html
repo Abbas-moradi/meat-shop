@@ -28,6 +28,7 @@
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             {% for product in products %}
             <form action="{% url 'order:card_add' product.id %}" method="post">
+                {% csrf_token %}
                 <div class="col mb-5" >
                     <div class="card h-100">
                         {% if product.economic %}
@@ -42,6 +43,15 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <a href="{{ product.get_absolute_url }}" class="fw-bolder h5" style="text-decoration: none;">{{ product.name }}</a><br>
+                                <!-- product quantity -->
+                                <div class="row">
+                                    <div class="col">
+                                        <p>مقدار محصول</p>
+                                    </div>
+                                    <div class="col">
+                                        <input name="quantity" type="number" class="form-control form-control-sm text-center" value="{{ product.number }}">
+                                    </div>
+                                </div>                                
                                 <!-- Product price-->
                                 <p>قیمت هر کیلو {{ product.price }} تومان</p>
                                 <p class="fw-bolder">مقدار باقیمانده {{ product.inventory }} کیلو</p>
@@ -49,12 +59,12 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" type="submit">افزودن به سبد خرید </a></div>
+                            <div class="text-center"><button class="btn btn-outline-dark mt-auto" type="submit">افزودن به سبد خرید </button></div>
                         </div>
                     </div>
                 </div>
             </form>
-                {% endfor %}
+            {% endfor %}
             </div>
         {% endif %}
     </div>
