@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from product.models import Product
+from accounts.models import User, Address
+from order.models import Order, OrderItem
 from django.views import View
+from datetime import datetime
 from .card import Card
 
 
@@ -57,4 +60,26 @@ class UserReceipt(View):
     receipt_temp = 'inc/order-recipt.html'
 
     def get(self, request):
-        return render(request, self.receipt_temp) 
+        card = Card(request)
+        finally_price = sum(item['total_price'] for item in card)
+        user = User.objects.get(phone_number=request.user)
+        product_item = [item for item in card]
+        product_num = len(product_item)
+        order = Order.objects.create(
+            user=user, total_price=finally_price, 
+            product_number=product_num,
+        )
+
+        for item in card:
+            OrderItem.objects.create(
+                order=order, product_id=item['product'], product_price=int(item['price']),
+                product_quantity=int(item['quantity']), total_price=int(item['total_price'])
+                )
+        id = order.id
+        time_now = datetime.now()
+        user_address = get_object_or_404(Address, user=user)
+        if not user_address:
+            messages.success(request, ' آدرسی برای شما ثبت نشده، لطفا یک آدرس ثبت کنید')
+            return redirect('account:profile')
+        return render(request, self.receipt_temp, {'items': card, 'id': id, 'date': time_now,
+                                                   'address': user_address,  }) 

@@ -4,9 +4,9 @@ from accounts.models import User
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='orders')
-    paid = models.BooleanField(default=False)
     total_price = models.PositiveBigIntegerField()
     product_number = models.PositiveIntegerField()
+    paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
     on_delete = models.BooleanField(default=False)
