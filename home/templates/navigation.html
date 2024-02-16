@@ -3,10 +3,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <div class="container px-4 px-lg-5 ">
         <form class="d-flex">
-            <button class="btn btn-outline-dark" type="submit">
+            <a class="btn btn-outline-dark" href="{% url 'home:about' %}">
                 <i class="me-1"></i>
                 قصابی دامیران(زیاران) <img src="{% static 'home/assets/favicon.png' %}" alt="عکس" style="height: 30px;">
-            </button>
+            </a>
         </form>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
@@ -29,7 +29,9 @@
             <a class="btn btn-outline-dark" href="{% url 'order:shoping_card' %}">
                 سبد خرید
                 <i class="bi bi-cart-fill me-1"></i>
-                <span class="badge bg-danger text-white ms-1 rounded-pill">2</span>
+                {% if item_number|length > 0 %}
+                    <span class="badge bg-danger text-white ms-1 rounded-pill">{{ item_number|length }}</span>
+                {% endif %}
             </a>
     </div>                        
 </nav>

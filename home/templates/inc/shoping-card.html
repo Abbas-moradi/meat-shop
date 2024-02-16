@@ -20,7 +20,7 @@
                     <h3 class="display-5 mb-2 text-center">سبد خرید شما</h3>
                 {% endif %}
                     <p class="mb-5 text-center">
-                        <i class="text-info font-bold">3</i> تعداد اقلام کارت خرید شما</p>
+                        <i class="text-info font-bold">{{ item_number|length }}</i> تعداد اقلام کارت خرید شما</p>
                     <table id="shoppingCart" class="table table-condensed table-responsive">
                         <thead>
                             <tr>
@@ -54,13 +54,13 @@
                                     <td data-th="Price">{{ item.total_price }}</td>
                                     <td class="actions" data-th="">
                                         <div class="text-center">
-                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit">
+                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
                                                 <i class="bi bi-play-fill"></i>
                                             </button>
                                             </form>
                                             <form action="{% url 'order:item_remove' item.product %}" method="post">
                                                 {% csrf_token %}
-                                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit">
+                                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="حذف کالا از سبد خرید">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
@@ -71,8 +71,8 @@
                         </tbody>
                     </table>
                     <div class="float-right text-right" dir="rtl">
-                        <h4>جمع مبلغ:</h4>
-                        <h1>ریال 99.00</h1>
+                        <h4>جمع کل سبد خرید:</h4>
+                        <h1>{{ finally_price }} ریال</h1>
                     </div>
                 </div>
             </div>

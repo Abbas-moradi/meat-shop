@@ -20,6 +20,9 @@ class Card:
         for item in card.values():
             item['total_price'] = int(item['price']) * item['quantity']
             yield item
+    
+    def __len__(self):
+        return sum(item['quantity'] for item in self.card.values())
 
     def add(self, product, quantity):
         product_id = str(product.id)
