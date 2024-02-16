@@ -13,6 +13,12 @@ class Product(models.Model):
     discount = models.PositiveSmallIntegerField()
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='products')
     economic = models.BooleanField(default=False)
+    UNIT_CHOICES = (
+        ('kg', 'کیلوگرم'),
+        ('pk', 'بسته'),
+        ('st', 'یک دست')
+    )
+    unit = models.CharField(max_length=10, choices=UNIT_CHOICES)
     status = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
 
