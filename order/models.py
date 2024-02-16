@@ -18,3 +18,21 @@ class Order(models.Model):
     
     def __str__(self) -> str:
         return self.id
+    
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_products')
+    product_id = models.CharField(max_length=150)
+    product_price = models.PositiveIntegerField()
+    product_quantity = models.PositiveSmallIntegerField()
+    total_price = models.PositiveIntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = 'orderproduct'
+        verbose_name_plural = 'orderproducts'
+        ordering = ('created',)
+    
+    def __str__(self) -> str:
+        return self.id
