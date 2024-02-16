@@ -30,8 +30,8 @@ class OrderItem(models.Model):
     status = models.BooleanField(default=True)
 
     class Meta:
-        verbose_name = 'orderproduct'
-        verbose_name_plural = 'orderproducts'
+        verbose_name = 'orderitem'
+        verbose_name_plural = 'orderitems'
         ordering = ('created',)
     
     def __str__(self) -> str:
