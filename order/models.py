@@ -11,6 +11,7 @@ class Order(models.Model):
     address = models.TextField()
     paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
+    shamsi = models.CharField(max_length=150)
     status = models.BooleanField(default=True)
     on_delete = models.BooleanField(default=False)
 
@@ -30,6 +31,7 @@ class OrderItem(models.Model):
     product_quantity = models.PositiveSmallIntegerField()
     total_price = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now_add=True)
+    shamsi = models.CharField(max_length=150)
     status = models.BooleanField(default=True)
 
     class Meta:

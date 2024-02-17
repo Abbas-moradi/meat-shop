@@ -6,7 +6,8 @@ from order.models import Order, OrderItem
 from django.views import View
 from datetime import datetime
 from .card import Card
-from utils import convert_to_toman
+from utils import convert_to_toman, convert_to_jalali
+from datetime import datetime
 
 
 class ShopingCard(View):
@@ -86,16 +87,17 @@ class UserReceipt(View):
         usadrs = ''
         for adrs in user_address:
             usadrs += str(adrs)
-
+        shamsi_date = convert_to_jalali(datetime.now())
         order = Order.objects.create(
             user=user, total_price=finally_price, finally_price=end_price,
-            product_number=product_num,tax=tax,address=usadrs
+            product_number=product_num,tax=tax,address=usadrs, shamsi=shamsi_date
         )
 
         for item in card:
             OrderItem.objects.create(
                 order=order, product_id=item['product'], product_price=int(item['price']),
-                product_quantity=int(item['quantity']), total_price=int(item['total_price'],)
+                product_quantity=int(item['quantity']), total_price=int(item['total_price'],),
+                shamsi=shamsi_date
                 )
         items = OrderItem.objects.filter(order=order.id)
         del request.session['card']
