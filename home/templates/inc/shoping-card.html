@@ -72,7 +72,7 @@
                     </table>
                     <div class="float-right text-right" dir="rtl">
                         <h4>جمع کل سبد خرید:</h4>
-                        <h1>{{ finally_price }} ریال</h1>
+                        <h1>{{ finally_price }} تومان</h1>
                     </div>
                 </div>
             </div>
@@ -94,16 +94,6 @@
         </section>
         <!-- Shoping Card End-->
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    <script>
-                        alert("{{ message }}");
-                    </script>
-                </div>
-            {% endfor %}
-        {% endif %}
-       
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy;  www.Qasaab.ir 2023</p></div>
@@ -115,6 +105,16 @@
               alert("{{ alert }}");
           </script>
         </div>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    <script>
+                        alert("{{ message }}");
+                    </script>
+                </div>
+            {% endfor %}
         {% endif %}
 
         {% include 'footer.html' %}

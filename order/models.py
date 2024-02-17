@@ -6,6 +6,9 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='orders')
     total_price = models.PositiveBigIntegerField()
     product_number = models.PositiveIntegerField()
+    tax = models.PositiveIntegerField()
+    finally_price = models.PositiveIntegerField()
+    address = models.TextField()
     paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
@@ -17,7 +20,7 @@ class Order(models.Model):
         ordering = ('created',)
     
     def __str__(self) -> str:
-        return self.id
+        return str(self.id)
     
 
 class OrderItem(models.Model):
@@ -35,4 +38,4 @@ class OrderItem(models.Model):
         ordering = ('created',)
     
     def __str__(self) -> str:
-        return self.id
+        return str(self.id)

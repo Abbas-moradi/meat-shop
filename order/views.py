@@ -60,26 +60,42 @@ class UserReceipt(View):
     receipt_temp = 'inc/order-recipt.html'
 
     def get(self, request):
+        user_address = Address.objects.filter(user=request.user).exists()
+        if user_address is False:
+            messages.success(request, ' آدرسی برای شما ثبت نشده، لطفا یک آدرس ثبت کنید')
+            return redirect('account:address')
+        
+        user_address = Address.objects.filter(user=request.user)
+
         card = Card(request)
+        item_in_card = 0
+        for itm in card:
+            item_in_card += 1
+        if item_in_card == 0 :
+            messages.success(request, 'سبد خرید شما خالی است')
+            return redirect('order:shoping_card')
+        
         finally_price = sum(item['total_price'] for item in card)
         user = User.objects.get(phone_number=request.user)
         product_item = [item for item in card]
         product_num = len(product_item)
+        tax = int(finally_price * 0.09)
+        end_price = int(tax) + finally_price
+        usadrs = ''
+        for adrs in user_address:
+            usadrs += str(adrs)
+
         order = Order.objects.create(
-            user=user, total_price=finally_price, 
-            product_number=product_num,
+            user=user, total_price=finally_price, finally_price=end_price,
+            product_number=product_num,tax=tax,address=usadrs
         )
 
         for item in card:
             OrderItem.objects.create(
                 order=order, product_id=item['product'], product_price=int(item['price']),
-                product_quantity=int(item['quantity']), total_price=int(item['total_price'])
+                product_quantity=int(item['quantity']), total_price=int(item['total_price'],)
                 )
-        id = order.id
-        time_now = datetime.now()
-        user_address = get_object_or_404(Address, user=user)
-        if not user_address:
-            messages.success(request, ' آدرسی برای شما ثبت نشده، لطفا یک آدرس ثبت کنید')
-            return redirect('account:profile')
-        return render(request, self.receipt_temp, {'items': card, 'id': id, 'date': time_now,
-                                                   'address': user_address,  }) 
+        items = OrderItem.objects.filter(order=order.id)
+        del request.session['card']
+       
+        return render(request, self.receipt_temp, {'order': order, 'items': items}) 
