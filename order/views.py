@@ -6,6 +6,7 @@ from order.models import Order, OrderItem
 from django.views import View
 from datetime import datetime
 from .card import Card
+from utils import convert_to_toman
 
 
 class ShopingCard(View):
@@ -15,8 +16,9 @@ class ShopingCard(View):
     def get(self, request):
         card = Card(request)
         finally_price = sum(item['total_price'] for item in card)
-        return render(request, self.card_temp, {'card': card,
-                                                'finally_price': finally_price})
+        toman = convert_to_toman(int(finally_price))
+        return render(request, self.card_temp, {'card': card,'finally_price': finally_price,
+                                                'toman': toman})
     
 
 class ShopingCardUpdate(View):
