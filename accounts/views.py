@@ -12,7 +12,15 @@ class Profile(View):
         return render(request, self.prof_temp, {'user': user})
     
     def post(self, request):
-        pass
+        user = request.user
+        user.full_name = request.POST['full_name']
+        user.phone_number = request.POST['phone_number']
+        user.email = request.POST['email']
+        if len(request.POST['password']) > 8:
+            user.set_password(request.POST['password'])
+        user.save()
+        messages.success(request, 'اطلاعات کاربری با موفقیت بروزرسانی شد')
+        return render(request, self.prof_temp)
 
 
 class UserAddress(View):
