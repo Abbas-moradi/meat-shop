@@ -24,7 +24,7 @@
                       <p style="color: #7e8d9f;font-size: 20px;">صورتحساب >> <strong>شماره: #{{ order.id }}-</strong></p>
                     </div>
                     <div class="col-xl-3 float-end">
-                      <a class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
+                      <a onclick="printPage()" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
                           class="fas fa-print text-primary"></i> Print</a>
                       <a class="btn btn-light text-capitalize" data-mdb-ripple-color="dark"><i
                           class="far fa-file-pdf text-danger"></i> Export</a>
@@ -125,7 +125,6 @@
                         {% endif %}
                       </div>
                     </div>
-            
                   </div>
                 </div>
               </div>
@@ -152,6 +151,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{% static 'home/js/scripts.js' %}"></script>
-
+        <script>
+            function printPage() {
+                window.print();
+            }
+        </script>
     </body>
 </html>

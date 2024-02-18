@@ -38,7 +38,7 @@ class UserAddress(View):
     def post(self, request):
         Address.objects.create(
             user = request.user,
-            city = request.POST['city'],
+            city = request.POST.get('city'),
             neighbourhood = request.POST['neighbourhood'],
             street = request.POST['street'],
             alley = request.POST['alley'],
@@ -71,3 +71,13 @@ class ProfileReceipt(View):
         order = Order.objects.get(id=id)
         items = OrderItem.objects.filter(order=order)
         return render(request, self.rec_temp, {'order': order, 'items': items})
+    
+
+class DeleteAddress(View):
+    adrs_temp = 'inc/user-address.html'
+
+    def post(self, request):
+        print(request.POST['id'])
+        Address.objects.get(id=request.POST['id'])
+        user_address = Address.objects.filter(user=request.user)
+        return render(request, self.adrs_temp, {'address': user_address})
