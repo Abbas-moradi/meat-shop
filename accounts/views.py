@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views import View
 from .models import User, Address
+from order.models import Order, OrderItem
 
 
 class Profile(View):
@@ -9,7 +10,8 @@ class Profile(View):
 
     def get(self, request):
         user = User.objects.get(phone_number=request.user.phone_number)
-        return render(request, self.prof_temp, {'user': user})
+        order = Order.objects.filter(status=True, on_delete=False)
+        return render(request, self.prof_temp, {'user': user, 'order': order})
     
     def post(self, request):
         user = request.user
@@ -60,3 +62,12 @@ class ChangeAddress(View):
             addr.save()
         messages.success(request, 'آدرس اصلی برای ارسال مرسولات پستی تغییر کرد.')
         return redirect('account:address')
+
+
+class ProfileReceipt(View):
+    rec_temp = 'inc/profile_receipt.html'
+
+    def get(self, request, id):
+        order = Order.objects.get(id=id)
+        items = OrderItem.objects.filter(order=order)
+        return render(request, self.rec_temp, {'order': order, 'items': items})

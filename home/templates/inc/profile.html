@@ -95,16 +95,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                                {% for addr in address %}
+                                {% for ord in order %}
                                 <tr>
-                                    <th scope="row" type="value" name="address_id" class="th">{{ addr.id }}</th>
-                                    <td>{{ addr.city }}</td>
-                                    <td>{{ addr.neighbourhood }}</td>
-                                    <td>{{ addr.street }}</td>
-                                    <td>{{ addr.alley }}</td>
+                                    <th scope="row" type="value" name="address_id" class="th">{{ forloop.counter }}</th>
+                                    <td>
+                                        <form action="{% url 'account:pro_receipt' ord.id %}" method="get">
+                                        {% csrf_token %}
+                                            <button type="submit" class="btn btn-info" name="id">{{ ord.id }}</button>
+                                        </form>
+                                    </td>
+                                    <td>{{ ord.shamsi }}</td>
+                                    <td>{{ ord.finally_price }} تومان</td>
+                                    <td>
+                                        {% if ord.paid %}
+                                        <span class="badge bg-success text-black fw-bold">پرداخت شده</span>
+                                        {% else %}
+                                        <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 {% endfor %}
-                                <p class="text-danger">برای دیدن جزئیات روی شماره رسید کلیک کنید.  </p>
+                                <p class="text-danger">برای دیدن جزئیات روی شماره رسید کلیک کنید. سفارشات درحالت پرداخت نشده را میتوانید با زدن بر روی گزینه <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>، پرداخت و دریافت کنید.  </p>
                         </tbody>
                     </table>
                 </div>
