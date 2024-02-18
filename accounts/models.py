@@ -40,6 +40,8 @@ class Address(models.Model):
     street = models.CharField(max_length=50)
     alley = models.CharField(max_length=50)
     building = models.CharField(max_length=50)
+    shamsi = models.CharField(max_length=150)
+    main = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f'{self.city}-{self.neighbourhood}-{self.street}-{self.alley}-{self.building}'

@@ -30,7 +30,8 @@ class UserAddress(View):
         user_address = Address.objects.filter(user=request.user).exists()
         if user_address is True:
             user_address = Address.objects.filter(user=request.user)
-        return render(request, self.adrs_temp, {'address': user_address})
+            return render(request, self.adrs_temp, {'address': user_address})
+        return render(request, self.adrs_temp)
     
     def post(self, request):
         Address.objects.create(
@@ -42,4 +43,20 @@ class UserAddress(View):
             building = request.POST['building']
         )
         messages.success(request, 'آدرس شما با موفقیت ثبت شد')
-        return render(request, self.adrs_temp)
+        user_address = Address.objects.filter(user=request.user)
+        return render(request, self.adrs_temp, {'address': user_address})
+    
+
+class ChangeAddress(View):
+    adrs_temp = 'inc/user-address.html'
+
+    def post(self, request):
+        user_address = Address.objects.filter(user=request.user)
+        for addr in user_address:
+            if int(addr.id) == int(request.POST['flexRadioDefault']):
+                addr.main = True
+            else:
+                addr.main = False
+            addr.save()
+        messages.success(request, 'آدرس اصلی برای ارسال مرسولات پستی تغییر کرد.')
+        return redirect('account:address')
