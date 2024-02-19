@@ -5,16 +5,17 @@
     <body>
        {% include 'navigation.html' %}
        {% include 'inc/site-header.html' %}
-        <nav aria-label="breadcrumb" >
-            <ol class="breadcrumb" ><a class="bi bi-geo-fill"></a>
-                <li class="breadcrumb-item"><a href="#">خانه</a></li>
-                <li class="breadcrumb-item active" aria-current="page"> محصولات</li>
-            </ol>
-        </nav><br>
+       <nav aria-label="breadcrumb" >
+           <ol class="breadcrumb" ><a class="bi bi-geo-fill"></a>
+            <li class="breadcrumb-item"><a href="#">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> محصولات</li>
+        </ol>
+    </nav><br>
+    
+        {% include 'inc/guarantee.html' %}
         {% include 'inc/product.html' %}
         {% include 'inc/economic.html' %}
         {% include 'inc/best-sellers-product.html' %}
-        {% include 'inc/guarantee.html' %}
         
        
         <!-- Footer-->
