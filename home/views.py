@@ -5,6 +5,8 @@ from django.utils import timezone
 from product.models import Category, Product
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+from order.models import OrderItem
+from django.db.models import Count
 import random
 
 class Home(View):
@@ -13,7 +15,10 @@ class Home(View):
         temp = self.home_temp
         eco_prod = Product.objects.filter(status=True, inventory__gt=0, economic=True) 
         products = Product.objects.filter(status=True, inventory__gt=0)
-        return render(request, temp, {'products': products, 'economic': eco_prod})
+        top_items = OrderItem.objects.values('product_id').annotate(total=Count('product_id')).order_by('-total')[:4]
+        top_product_ids = [item['product_id'] for item in top_items]
+        top_products = Product.objects.filter(name__in=top_product_ids)
+        return render(request, temp, {'products': products, 'economic': eco_prod, 'best_sellers': top_products})
     
     def post(self, request):
         pass

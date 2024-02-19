@@ -1,0 +1,52 @@
+{% load static %}
+<!-- Economic items section -->
+{% if economic %}
+<section class="py-5 bg-wite shadow rounded-3">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4 text-center" style="color:brown;">پرفروش ترین محصولات </h2>
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for product in best_sellers %}
+            <div class="col mb-5" >
+                <div class="card h-100">
+                    <form action="{% url 'order:card_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        {% if product.economic %}
+                        <!-- Sale badge-->
+                        <div class="badge position-absolute" style="top: 0.5rem; right: 0.5rem; background: chartreuse; color:rgb(106, 60, 27);">اقتصادی</div>
+                        {% endif %}
+                        <div class="badge bg-success text-white position-absolute" style="top: 0.5rem; left: 0.5rem">موجود</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="{{ product.pic.url }}" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <a href="{{ product.get_absolute_url }}" class="fw-bolder h5" style="text-decoration: none;">{{ product.name }}</a><br>
+                                <!-- product quantity -->
+                                <div class="row">
+                                    <div class="col">
+                                        <p>مقدار محصول</p>
+                                    </div>
+                                    <div class="col">
+                                        <input name="quantity" type="number" class="form-control form-control-sm text-center" value="{{ product.number }}">
+                                    </div>
+                                </div>                                
+                                <!-- Product price-->
+                                <p>قیمت هر کیلو {{ product.price }} تومان</p>
+                                <p class="fw-bolder">مقدار باقیمانده {{ product.inventory }} کیلو</p>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button class="btn btn-outline-dark mt-auto" type="submit">افزودن به سبد خرید </button></div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</section><br>
+{% endif %}
+<!-- Economic items section End -->
