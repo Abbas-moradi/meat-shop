@@ -59,12 +59,11 @@ class Register(View):
             
         else:
             OtpCode.objects.create(phone_number=request.POST['phone'],
-                                       email=request.POST['email'],
+                                       email='register@sample.com',
                                        code=otp_code)
         
         request.session['user_register_info'] = {
                     'phone_number': request.POST['phone'],
-                    'user_email': request.POST['email'],
                     'full_name': request.POST['name'],
                     'password': request.POST['password2']
                     }
@@ -78,14 +77,12 @@ class OtpConfirm(View):
     def post(self, request):
         user_phone = request.session['user_register_info']['phone_number']
         user_full_name = request.session['user_register_info']['full_name']
-        user_email = request.session['user_register_info']['user_email']
         user_password = request.session['user_register_info']['password']
-        otp_code = OtpCode.objects.filter(email=user_email).values_list('code', flat=True).first()
+        otp_code = OtpCode.objects.filter(phone_number=user_phone).values_list('code', flat=True).first()
         print(otp_code, '='*60)
         if int(otp_code)==int(request.POST['code']):
             User.objects.create(
                 phone_number=user_phone,
-                email=user_email,
                 full_name=user_full_name,
                 password=user_password
             )

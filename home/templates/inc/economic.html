@@ -1,10 +1,10 @@
 {% load static %}
 <!-- Economic items section -->
 {% if economic %}
-<section class="py-5 bg-success">
+<section class="py-5 bg-success shadow rounded-3">
     <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4">محصولات اقتصادی</h2>
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <h2 class="fw-bolder mb-4 text-center" style="color: chartreuse;">محصولات اقتصادی</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in economic %}
             <div class="col mb-5" >
                 <div class="card h-100">
@@ -12,7 +12,7 @@
                         {% csrf_token %}
                         {% if product.economic %}
                         <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">اقتصادی</div>
+                        <div class="badge position-absolute" style="top: 0.5rem; right: 0.5rem; background: chartreuse; color:rgb(106, 60, 27);">اقتصادی</div>
                         {% endif %}
                         <div class="badge bg-success text-white position-absolute" style="top: 0.5rem; left: 0.5rem">موجود</div>
                         <!-- Product image-->
@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-</section>
+</section><br>
 {% endif %}
 <!-- Economic items section End -->

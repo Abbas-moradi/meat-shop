@@ -56,7 +56,7 @@ class CardAddProduct(View):
         product = get_object_or_404(Product, id=product_id)
         card.add(product, int(request.POST['quantity']))
         messages.success(request, 'محصول شما با موفقیت به سبد خرید افزوده شد.')
-        return redirect('home:home')
+        return redirect('order:shoping_card')
 
 
 class UserReceipt(View):
@@ -68,7 +68,7 @@ class UserReceipt(View):
             messages.success(request, ' آدرسی برای شما ثبت نشده، لطفا یک آدرس ثبت کنید')
             return redirect('account:address')
         
-        user_address = Address.objects.filter(user=request.user)
+        user_address = Address.objects.filter(user=request.user, main=True)
 
         card = Card(request)
         item_in_card = 0

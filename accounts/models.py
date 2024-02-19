@@ -5,7 +5,7 @@ from accounts.managers import UserManager
 
 class User(AbstractBaseUser):
     phone_number = models.CharField(max_length=11, unique=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, null=True, blank=True)
     full_name = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
