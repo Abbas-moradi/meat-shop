@@ -28,6 +28,9 @@ class ShopingCardUpdate(View):
     def post(self, request, product):
         card = Card(request)
         product = get_object_or_404(Product, name=product)
+        if product.inventory < int(request.POST['quantity']):
+            messages.info(request, 'مقدار انتخابی شما بیشتر از مقدار باقیمانده محصول است')
+            return redirect('order:shoping_card')
         card.update(product, int(request.POST['quantity']))
         messages.success(request, 'کارت خرید شما با موفقیت بروز رسانی شد.')
         return redirect('order:shoping_card')
@@ -54,6 +57,9 @@ class CardAddProduct(View):
     def post(self, request, product_id):
         card = Card(request)
         product = get_object_or_404(Product, id=product_id)
+        if product.inventory < int(request.POST['quantity']):
+            messages.info(request, 'مقدار انتخابی شما بیشتر از مقدار باقیمانده محصول است')
+            return redirect('home:home')
         card.add(product, int(request.POST['quantity']))
         messages.success(request, 'محصول شما با موفقیت به سبد خرید افزوده شد.')
         return redirect('order:shoping_card')
@@ -99,6 +105,10 @@ class UserReceipt(View):
                 product_quantity=int(item['quantity']), total_price=int(item['total_price'],),
                 shamsi=shamsi_date
                 )
+            up_product = Product.objects.get(name=item['product'])
+            up_product.inventory -= int(item['quantity'])
+            up_product.save()
+
         items = OrderItem.objects.filter(order=order.id)
         del request.session['card']
         toman = convert_to_toman(int(order.finally_price))

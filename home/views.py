@@ -17,7 +17,7 @@ class Home(View):
         products = Product.objects.filter(status=True, inventory__gt=0)
         top_items = OrderItem.objects.values('product_id').annotate(total=Count('product_id')).order_by('-total')[:4]
         top_product_ids = [item['product_id'] for item in top_items]
-        top_products = Product.objects.filter(name__in=top_product_ids)
+        top_products = Product.objects.filter(name__in=top_product_ids, inventory__gt=0)
         return render(request, temp, {'products': products, 'economic': eco_prod, 'best_sellers': top_products})
     
     def post(self, request):
