@@ -83,7 +83,7 @@
                         <tbody>
                           {% for item in items %}
                           <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ item.product_id }}</td>
                             <td>{{ item.product_quantity }}</td>
                             <td>{{ item.product_price }}</td>
@@ -108,9 +108,8 @@
                           <li class="text-muted ms-3 mt-2"><span class="text-black me-4">مالیات(9%)</span>{{ order.tax }}</li>
                         </ul>
                         <p class="text-black float-start"><span class="text-black me-3"> قیمت نهایی </span><span
-                            style="font-size: 25px;">{{ order.finally_price }}</span></p>
-                        
-                      </div>
+                            style="font-size: 25px;">{{ order.finally_price }}</span><br>{{ toman }}</p>
+                          </div>
                     </div>
                     <hr>
                     <div class="row">

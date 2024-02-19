@@ -82,7 +82,7 @@ class UserReceipt(View):
         user = User.objects.get(phone_number=request.user)
         product_item = [item for item in card]
         product_num = len(product_item)
-        tax = int(finally_price * 0.09)
+        tax = int(finally_price * 0.00)
         end_price = int(tax) + finally_price
         usadrs = ''
         for adrs in user_address:
@@ -101,5 +101,5 @@ class UserReceipt(View):
                 )
         items = OrderItem.objects.filter(order=order.id)
         del request.session['card']
-       
-        return render(request, self.receipt_temp, {'order': order, 'items': items}) 
+        toman = convert_to_toman(int(order.finally_price))
+        return render(request, self.receipt_temp, {'order': order, 'items': items, 'toman': toman}) 

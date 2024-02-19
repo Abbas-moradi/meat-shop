@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.views import View
 from .models import User, Address
 from order.models import Order, OrderItem
+from utils import convert_to_toman
 
 
 class Profile(View):
@@ -10,7 +11,7 @@ class Profile(View):
 
     def get(self, request):
         user = User.objects.get(phone_number=request.user.phone_number)
-        order = Order.objects.filter(status=True, on_delete=False).reverse()
+        order = Order.objects.filter(status=True, on_delete=False, user=request.user).reverse()
         return render(request, self.prof_temp, {'user': user, 'order': order})
     
     def post(self, request):
@@ -87,7 +88,8 @@ class ProfileReceipt(View):
     def get(self, request, id):
         order = Order.objects.get(id=id)
         items = OrderItem.objects.filter(order=order)
-        return render(request, self.rec_temp, {'order': order, 'items': items})
+        toman = convert_to_toman(int(order.finally_price))
+        return render(request, self.rec_temp, {'order': order, 'items': items, 'toman': toman})
     
 
 class DeleteAddress(View):
