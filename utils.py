@@ -1,6 +1,8 @@
 from num2words import num2words
 from jdatetime import GregorianToJalali
 from datetime import datetime
+from ippanel import Client, Error, HTTPError, ResponseCode
+
 
 def convert_to_jalali(gregorian_date):
     jalali_date = GregorianToJalali(gregorian_date.year, gregorian_date.month, gregorian_date.day)

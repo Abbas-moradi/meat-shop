@@ -1,10 +1,10 @@
 {% load static %}
 <!-- Economic items section -->
 {% if economic %}
-<section class="py-5 bg-wite shadow rounded-3" style="background-color:honeydew;">
+<section class="py-5 bg-wite shadow rounded-3" style="background-color:thistle;">
     <div class="container px-4 px-lg-5 mt-5">
         <h2 class="fw-bolder mb-4 text-center" style="color:brown;">پرفروش ترین محصولات </h2>
-        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div id="best-sellers" class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in best_sellers %}
             <div class="col mb-5" >
                 <div class="card h-100">
