@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'order.context_processor.card_number',
+                'order.context_processor.convert_to_jalali',
             ],
         },
     },
