@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from accounts.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import Group
-from accounts.models import User, OtpCode, Address
+from accounts.models import User, OtpCode, Address, NewsLetter
 
 
 class UserAdmin(BaseUserAdmin):
@@ -35,6 +35,11 @@ class OtpCodeAdmin(admin.ModelAdmin):
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('user', 'city', 'neighbourhood', 'street', 'alley', 'building')
+
+
+@admin.register(NewsLetter)
+class NewsLetterAdmin(admin.ModelAdmin):
+    list_display = ('user', 'email', 'created', 'status')
 
 
 admin.site.unregister(Group)
