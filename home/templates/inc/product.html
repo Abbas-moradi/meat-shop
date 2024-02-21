@@ -52,8 +52,8 @@
                                     </div>
                                 </div>                                
                                 <!-- Product price-->
-                                <p>قیمت هر کیلو {{ product.price }} تومان</p>
-                                <p class="fw-bolder">مقدار باقیمانده {{ product.inventory }} کیلو</p>
+                                <p>قیمت هر {{ product.unit }} {{ product.price }} تومان</p>
+                                <p class="fw-bolder">مقدار باقیمانده {{ product.inventory }} {{ product.unit }}</p>
                             </div>
                         </div>
                         <!-- Product actions-->

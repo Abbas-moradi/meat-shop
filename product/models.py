@@ -14,9 +14,9 @@ class Product(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='products')
     economic = models.BooleanField(default=False)
     UNIT_CHOICES = (
-        ('kg', 'کیلوگرم'),
-        ('pk', 'بسته'),
-        ('st', 'یک دست')
+        ('کیلوگرم', 'kg'),
+        ('بسته', 'pk'),
+        ('یک دست', 'st')
     )
     unit = models.CharField(max_length=10, choices=UNIT_CHOICES)
     status = models.BooleanField(default=True)
