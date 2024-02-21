@@ -125,7 +125,7 @@ class Forgot(View):
         request.session['user_forgot_password'] = {
             'user_phone': phone
         }
-        message = f'اگر شما کد فراموشی رمز را درخواست نداده اید این پیام را نادیده بگیرید. \n کد تایید شما: {otp_code}'
+        message = f'اگر شما کد فراموشی رمز را درخواست نداده اید این پیام را نادیده بگیرید. \n کد تایید شما: {otp_code} \n www.Qasaab.ir'
         otp_sender(phone, message)
         return render(request, self.forgot_temp)
 
