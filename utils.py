@@ -16,7 +16,7 @@ def convert_to_toman(number):
 
 
 def otp_sender(phone, message):
-    client = Client("asjkdhakjhdhkajhdkja")
+    client = Client("ykD_Lp-isbx9Ka0KJUOjqcKa8OUE6CWdyBR5eOa_vvg=")
 
     try:
         message_id = client.send("+983000505", [phone], message, "summary")

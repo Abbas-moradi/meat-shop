@@ -7,6 +7,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from order.models import OrderItem
 from django.db.models import Count
+from utils import otp_sender
 import random
 
 class Home(View):
@@ -33,11 +34,7 @@ class Register(View):
         return render(request, self.reg_temp)
     
     def post(self, request):
-        email_checker = User.objects.filter(email=request.POST['email']).exists()
         phone_number_checker = User.objects.filter(phone_number=request.POST['phone']).exists()
-        
-        if email_checker:
-            return render(request, self.reg_temp, {'alert':'ایمیل تکراری ! ، لطفا یک ایمیل دیگر برای ثبت نام وارد کنید.'})
         
         if phone_number_checker:
             return render(request, self.reg_temp, {'alert': 'شماره تلفن تکراری! ، لطفا شماره دیگری را وارد کنید.'})
@@ -45,8 +42,6 @@ class Register(View):
             return render(request, self.reg_temp, {'alert': 'رمز هایی که وارد کرده اید با هم برابر نیستند.'})
         
         otp_code = random.randint(10000, 99999)
-        subject = 'کد تایید ثبت نام'
-        body = f'کد تایید شما \n code:{otp_code}'
         user_code_exists = OtpCode.objects.filter(phone_number=request.POST['phone']).exists()
         if user_code_exists:
             user_code_created_time = OtpCode.objects.filter(phone_number=request.POST['phone']).values_list('created', flat=True).first()
@@ -72,6 +67,8 @@ class Register(View):
                     'full_name': request.POST['name'],
                     'password': request.POST['password2']
                     }
+        message = f'کد تایید ثبت نام شما : {otp_code} \n www.Qasaab.ir'
+        otp_sender(request.POST['phone'], message)
         return render(request, self.otp_temp)
 
 
@@ -84,7 +81,7 @@ class OtpConfirm(View):
         user_full_name = request.session['user_register_info']['full_name']
         user_password = request.session['user_register_info']['password']
         otp_code = OtpCode.objects.filter(phone_number=user_phone).values_list('code', flat=True).first()
-        print(otp_code, '='*60)
+        
         if int(otp_code)==int(request.POST['code']):
             User.objects.create(
                 phone_number=user_phone,
@@ -128,6 +125,8 @@ class Forgot(View):
         request.session['user_forgot_password'] = {
             'user_phone': phone
         }
+        message = f'اگر شما کد فراموشی رمز را درخواست نداده اید این پیام را نادیده بگیرید. \n کد تایید شما: {otp_code}'
+        otp_sender(phone, message)
         return render(request, self.forgot_temp)
 
     def post(self, request):
