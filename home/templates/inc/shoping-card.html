@@ -55,7 +55,7 @@
                                     <td class="actions" data-th="">
                                         <div class="text-center">
                                             <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
-                                                <i class="bi bi-play-fill"></i>
+                                                <i class="bi bi-arrow-repeat"></i>
                                             </button>
                                             </form>
                                             <form action="{% url 'order:item_remove' item.product %}" method="post">
@@ -77,6 +77,9 @@
                     </div>
                 </div>
             </div>
+            {% if not card %}
+                <p class="text-center h4 text-secondary">سبد خرید شما خالی است</p>
+            {% endif %}
             <div class="row mt-4 d-flex align-items-center">
                 {% if request.user.is_authenticated %}
                 <div class="col-sm-6 order-md-2 text-right">
