@@ -13,14 +13,17 @@
     </nav>
 
         <!--Section: Contact v.2-->
-        <div class="container my-5">
-            <div class="row gutters" style="margin-left: 0px; margin-right: 0px;">
+        <div class="container my-5" dir="rtl">
+            <div class="row " style="margin-left: 0px; margin-right: 0px;">
                 <div class="card h-100" >
                     <div class="card-body shadow-sm">
                         <section class="mb-4">
 
                             <!--Section heading-->
-                            <h2 class="h1-responsive font-weight-bold text-center my-4">ارتباط با ما</h2>
+                            <div class="user-avatar">
+                                <h2 class="h1-responsive font-weight-bold text-center my-4">ارتباط با ما<img src="{% static 'home/assets/favicon.png' %}" alt="Maxwell Admin" style="width: 70px;" class="rounded-pill"></h2>
+                                
+                            </div>
                             <!--Section description-->
                             <p class="text-center w-responsive mx-auto mb-5">آیا سؤالی دارید؟ ما به شما پیشنهاد می‌دهیم با ما در تماس مستقیم باشید. تیم ما در دسترس شماست و طی چند ساعت آینده به شما کمک خواهد کرد</p>
 
@@ -28,7 +31,7 @@
 
                                 <!--Grid column-->
                                 <div class="col-md-9 mb-md-0 mb-5">
-                                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                                    <form action="" method="post">
 
                                         <!--Grid row-->
                                         <div class="row">
@@ -70,22 +73,16 @@
 
                                             <!--Grid column-->
                                             <div class="col-md-12">
-
                                                 <div class="md-form">
                                                     <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
                                                     <label for="message">پیام شما </label>
                                                 </div>
-
                                             </div>
                                         </div>
                                         <!--Grid row-->
-
+                                        <br>
+                                        <button class="btn btn-primary" type="submit">ارسال پیام</button>
                                     </form>
-
-                                    <div class="text-center text-md-left">
-                                        <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">ارسال موضوع</a>
-                                    </div>
-                                    <div class="status"></div>
                                 </div>
                                 <!--Grid column-->
 
@@ -97,11 +94,11 @@
                                         </li>
 
                                         <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                                            <p>+989362546408</p>
+                                            <p>09126818407</p>
                                         </li>
 
                                         <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                                            <p>en.moradi.66@gmail.com</p>
+                                            <p>info@qasaab.ir</p>
                                         </li>
                                     </ul>
                                 </div>
