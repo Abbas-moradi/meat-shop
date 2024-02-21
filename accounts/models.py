@@ -51,4 +51,18 @@ class OtpCode(models.Model):
 
     def __str__(self) -> str:
         return f'{self.phone_number}-{self.email}-{self.code}'
-    
+
+
+class NewsLetter(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField()
+    created = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = 'newsletter'
+        verbose_name_plural = 'newsletters'
+        ordering = ('created',)
+
+    def __str__(self) -> str:
+        return self.email
