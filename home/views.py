@@ -161,6 +161,12 @@ class About(View):
         return render(request, self.about_temp)
     
 
+class ContactUs(View):
+    cont_temp = 'contactus.html'
+
+    def get(self, request):
+        return render(request, self.cont_temp)
+
 class UserLogout(LoginRequiredMixin, View):
     temp = 'index.html'
 
