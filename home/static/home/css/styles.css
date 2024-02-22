@@ -34,8 +34,6 @@
   padding: 10px 20px;
   border-bottom: 2px solid #000000;
   animation: slideIn 3s ease-in-out;
-  font-family: 'A Iranian Sans';
-
 }
 
 @keyframes slideIn {
@@ -56,14 +54,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  font-family: 'A Iranian Sans';
 
 }
 
 .navbar-nav .nav-item {
   text-align: center;
-  font-family: 'A Iranian Sans';
-
 }
 
 
@@ -140,8 +135,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: 'A Iranian Sans';
-
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -152,7 +145,6 @@
 
 body {
   margin: 0;
-  font-family: 'A Iranian Sans';
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -169,8 +161,6 @@ hr {
   border: 0;
   border-top: 1px solid;
   opacity: 0.25;
-  font-family: 'A Iranian Sans';
-
 }
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
@@ -178,14 +168,10 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
-  font-family: 'A Iranian Sans';
-
 }
 
 h1, .h1 {
   font-size: calc(1.375rem + 1.5vw);
-  font-family: 'A Iranian Sans';
-
 }
 @media (min-width: 1200px) {
   h1, .h1 {
