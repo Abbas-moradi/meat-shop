@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from accounts.models import User, OtpCode
+from home.models import ContactUs
 from django.utils import timezone
 from product.models import Category, Product
 from django.contrib.auth import login, logout, authenticate
@@ -8,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from order.models import OrderItem
 from django.db.models import Count
 from utils import otp_sender
+from django.contrib import messages
 import random
 
 class Home(View):
@@ -161,11 +163,22 @@ class About(View):
         return render(request, self.about_temp)
     
 
-class ContactUs(View):
+class Contactus(View):
     cont_temp = 'contactus.html'
 
     def get(self, request):
         return render(request, self.cont_temp)
+    
+    def post(self, request):
+        ContactUs.objects.create(
+            name = request.POST['name'],
+            email = request.POST['email'],
+            subject = request.POST['subject'],
+            message = request.POST['message']
+        )
+        messages.success(request, 'با تشکر ،پیام شما با موفقیت برای ما ارسال شد.')
+        return redirect('home:contactus')
+
 
 class UserLogout(LoginRequiredMixin, View):
     temp = 'index.html'

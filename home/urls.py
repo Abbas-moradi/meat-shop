@@ -9,7 +9,7 @@ urlpatterns = [
     path('otp_confirm/',views.OtpConfirm.as_view(), name='otp_confirm'),
     path('login/',views.Login.as_view(), name='login'),
     path('about/',views.About.as_view(), name='about'),
-    path('contactus/',views.ContactUs.as_view(), name='contactus'),
+    path('contactus/',views.Contactus.as_view(), name='contactus'),
     path('forgot/',views.Forgot.as_view(), name='forgot'),
     path('logout/',views.UserLogout.as_view(), name='logout'),
 ]
