@@ -92,7 +92,8 @@
                             <th scope="col">شماره سفارش</th>
                             <th scope="col">تاریخ سفارش</th>
                             <th scope="col">مبلغ سفارش</th>
-                            <th scope="col">وضعیت سفارش</th>
+                            <th scope="col">وضعیت پرداخت</th>
+                            <th scope="col">وضعیت ارسال</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -114,6 +115,14 @@
                                         <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
                                         {% endif %}
                                     </td>
+                                    <td>
+                                        {% if ord.deliver %}
+                                        <button type="button" class="btn btn-sm btn-success" data-toggle="popover" title="تحویل شده به آدرس:{{ ord.address }}">تحویل شده</button>
+                                        {% else %}
+                                        <span class="badge bg-warning text-black fw-bold">تحویل نشده</span>
+                                        {% endif %}
+                                    </td>
+                                    
                                 </tr>
                                 {% endfor %}
                                 <p class="text-danger">برای دیدن جزئیات روی شماره رسید <button class="btn btn-info">12</button> کلیک کنید. سفارشات درحالت پرداخت نشده را میتوانید با زدن بر روی گزینه <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>، پرداخت و دریافت کنید.  </p>

@@ -10,6 +10,7 @@ class Order(models.Model):
     finally_price = models.PositiveIntegerField()
     address = models.TextField()
     paid = models.BooleanField(default=False)
+    deliver = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     shamsi = models.CharField(max_length=150)
     status = models.BooleanField(default=True)
