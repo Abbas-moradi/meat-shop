@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'header.html' %}
+    <body>
+       {% include 'navigation.html' %}
+       
+       <br><br>
+        <div class="row gutters" style="margin-left: 60px; margin-right: 60px;" dir="rtl">
+            <div class="card h-100" >
+                <div class="card-body shadow-sm text-center">
+                    <h6 class="text-center" style="background-color:tomato">وضعیت سفارشات روز گذشته</h6>
+                    <table class="table">
+                        
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">کاربر</th>
+                            <th scope="col">مبلغ خرید</th>
+                            <th scope="col">وضعیت پرداخت</th>
+                            <th scope="col">وضعیت ارسال</th>
+                            <th scope="col"> تاریخ </th>
+                            <th scope="col"> توضیحات </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>
+                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>@fat</td>
+                            <td>@fat</td>
+                            <td>
+                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <p class="btn rounded-pill" style="background-color:cadetblue">مبلغ کل خرید موفق مشتریان : 15550000 تومان</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="row gutters" style="margin-left: 60px; margin-right: 60px;" dir="rtl">
+            <div class="card h-100" >
+                <div class="card-body shadow-sm text-center">
+                    <h6 class="text-center rounded-pill" style="background-color:tomato">وضعیت سفارشات ماه گذشته</h6>
+                    <table class="table">
+                        
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">کاربر</th>
+                            <th scope="col">مبلغ خرید</th>
+                            <th scope="col">وضعیت پرداخت</th>
+                            <th scope="col">وضعیت ارسال</th>
+                            <th scope="col"> تاریخ </th>
+                            <th scope="col"> توضیحات </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>
+                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>@fat</td>
+                            <td>@fat</td>
+                            <td>
+                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <p class="btn rounded-pill" style="background-color:cadetblue">مبلغ کل خرید موفق مشتریان : 15550000 تومان</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <div class="row gutters" style="margin-left: 60px; margin-right: 60px;" dir="rtl">
+            <div class="card h-100" >
+                <div class="card-body shadow-sm text-center">
+                    <h6 class="btn rounded-pill" style="background-color:tomato">خلاصه وضعیت فروش</h6>
+                    <table class="table">
+                        
+                        <thead>
+                        <tr>
+                            <th scope="col">تعداد کاربران سایت</th>
+                            <th scope="col">تعداد کل خرید موفق</th>
+                            <th scope="col">تعداد کل خرید ناموفق </th>
+                            <th scope="col">مبلغ کل پرداخت شده </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>1366</td>
+                            <td>356</td>
+                            <td>785460000 تومان</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <p class="btn rounded-pill" style="background-color:cadetblue">مبلغ کل خرید موفق مشتریان : 15550000 تومان</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+        {% if alert %}
+        <div class="error-message">
+          <script>
+              alert("{{ alert }}");
+          </script>
+        </div>
+        {% endif %}
+               
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    <script>
+                        alert("{{ message }}");
+                    </script>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        {% include 'footer.html' %}
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'home/js/scripts.js' %}"></script>
+
+    </body>
+</html>
