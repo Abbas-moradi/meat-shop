@@ -11,10 +11,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
- .table {
-  max-height: 10px; 
-  overflow-y: auto; 
-}
+
 
  @media print {
   header, footer, .nav, .sidebar, .nav-link, .mini-nav {
@@ -3159,7 +3156,7 @@ textarea.form-control-lg {
   --bs-btn-color: #212529;
   --bs-btn-border-color: #212529;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #212529;
+  --bs-btn-hover-bg: #292321;
   --bs-btn-hover-border-color: #212529;
   --bs-btn-focus-shadow-rgb: 33, 37, 41;
   --bs-btn-active-color: #fff;

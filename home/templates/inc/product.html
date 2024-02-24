@@ -27,7 +27,7 @@
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             {% for product in products %}
             <div class="col mb-3" >
-                <div class="card h-100">
+                <div class="card h-100 text-center">
                     <form action="{% url 'order:card_add' product.id %}" method="post">
                         {% csrf_token %}
                         {% if product.economic %}
@@ -36,7 +36,7 @@
                         {% endif %}
                         <div class="badge bg-success text-white position-absolute" style="top: 0.5rem; left: 0.5rem">موجود</div>
                         <!-- Product image-->
-                        <img class="card-img-top" src="{{ product.pic.url }}" alt="..." style="width: 250px;"/>
+                        <img class="card-img-top" src="{{ product.pic.url }}" alt="..." style="width: 170px;"/>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
@@ -57,8 +57,8 @@
                             </div>
                         </div>
                         <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><button class="btn btn-outline-dark mt-auto" type="submit">افزودن به سبد خرید </button></div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" >
+                            <div class="text-center"><button class="btn btn-outline-dark mt-auto" type="submit" style="margin-top: 50%;">افزودن به سبد خرید </button></div>
                         </div>
                     </div>
                 </form>
