@@ -13,6 +13,9 @@
 
 
 
+
+
+
  @media print {
   header, footer, .nav, .sidebar, .nav-link, .mini-nav {
     display: none !important;

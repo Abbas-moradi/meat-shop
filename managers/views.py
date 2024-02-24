@@ -42,11 +42,8 @@ class Manage(UserPassesTestMixin, View):
 
     def post(self, request):
         order = Order.objects.get(id=request.POST['orderid'])
-        paid_status = request.POST.get('paid_status')
         delivery_status = request.POST.get('delivery_status')
-        paid_status = True if paid_status == 'paid' else False
         delivery_status = True if delivery_status == 'delivered' else False
-        order.paid = paid_status
         order.deliver = delivery_status
         order.save()
        

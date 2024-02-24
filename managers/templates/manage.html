@@ -40,10 +40,11 @@
                                     <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
                                     <td>{{ ld.total_price }} تومان</td>
                                     <td>
-                                        <select name="paid_status" class="form-select">
-                                            <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
-                                            <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
-                                        </select>
+                                        {% if ld.paid %}
+                                        <span class="badge bg-success text-black fw-bold">پرداخت شده</span>
+                                        {% else %}
+                                        <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <select name="delivery_status" class="form-select">
@@ -100,10 +101,11 @@
                                     <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
                                     <td>{{ ld.total_price }} تومان</td>
                                     <td>
-                                        <select name="paid_status" class="form-select">
-                                            <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
-                                            <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
-                                        </select>
+                                        {% if ld.paid %}
+                                        <span class="badge bg-success text-black fw-bold">پرداخت شده</span>
+                                        {% else %}
+                                        <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <select name="delivery_status" class="form-select">
