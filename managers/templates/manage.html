@@ -30,30 +30,35 @@
                         </thead>
                         <tbody>
                             {% for ld in last_day %}
-                        <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ ld.id }}</td>
-                            <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
-                            <td>{{ ld.total_price }} تومان</td>
-                            <td>
-                                <select name="paid_status" class="form-select">
-                                    <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
-                                    <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="delivery_status" class="form-select">
-                                    <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
-                                    <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
-                                </select>                                
-                            </td>
-                            <td>{{ ld.shamsi }}</td>
-                            <td>
-                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
-                                    <i class="bi bi-arrow-repeat"></i>
-                                </button>
-                            </td>
-                        </tr>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>
+                                        <input type="hidden" name="orderid" value="{{ ld.id }}" readonly style="width: 30px;">{{ ld.id }}
+                                    </td>
+                                    <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
+                                    <td>{{ ld.total_price }} تومان</td>
+                                    <td>
+                                        <select name="paid_status" class="form-select">
+                                            <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
+                                            <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="delivery_status" class="form-select">
+                                            <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
+                                            <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
+                                        </select>                                
+                                    </td>
+                                    <td>{{ ld.shamsi }}</td>
+                                    <td>
+                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
                         {% endfor %}
                         </tbody>
                     </table>
@@ -85,30 +90,35 @@
                         </thead>
                         <tbody>
                             {% for ld in last_month %}
-                        <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ ld.id }}</td>
-                            <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
-                            <td>{{ ld.total_price }} تومان</td>
-                            <td>
-                                <select name="paid_status" class="form-select">
-                                    <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
-                                    <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="delivery_status" class="form-select">
-                                    <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
-                                    <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
-                                </select>                                
-                            </td>
-                            <td>{{ ld.shamsi }}</td>
-                            <td>
-                                <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
-                                    <i class="bi bi-arrow-repeat"></i>
-                                </button>
-                            </td>
-                        </tr>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>
+                                        <input type="hidden" name="orderid" value="{{ ld.id }}" readonly style="width: 30px;">{{ ld.id }}
+                                    </td>
+                                    <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
+                                    <td>{{ ld.total_price }} تومان</td>
+                                    <td>
+                                        <select name="paid_status" class="form-select">
+                                            <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
+                                            <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="delivery_status" class="form-select">
+                                            <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
+                                            <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
+                                        </select>                                
+                                    </td>
+                                    <td>{{ ld.shamsi }}</td>
+                                    <td>
+                                        <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
                         {% endfor %}
                         </tbody>
                     </table>
@@ -147,14 +157,6 @@
             </div>
         </div>
        <br><br><br><br>
-
-        {% if alert %}
-        <div class="error-message">
-          <script>
-              alert("{{ alert }}");
-          </script>
-        </div>
-        {% endif %}
                
         
         {% if messages %}
