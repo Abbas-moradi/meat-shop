@@ -47,7 +47,7 @@ class Manage(UserPassesTestMixin, View):
         order.deliver = delivery_status
         order.save()
        
-        messages.success(request, 'تغییرات شما اعمال شد. \n لطفا در تغییرات دقت لازم را داشته باشید!')
+        messages.success(request, 'تغییرات شما اعمال شد. مدیر محترم لطفا در تغییرات دقت لازم را داشته باشید!')
         return redirect('manager:manage')
 
     def test_func(self) -> bool | None:
