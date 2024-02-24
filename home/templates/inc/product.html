@@ -22,7 +22,7 @@
         </section>
         <!-- Confirm Payment End -->
         {% else %}
-        <h4 class="fw-bolder text-center">محصولات موجود در فروشگاه</h4>
+        <h4 class="fw-bolder text-center" style="color: red;">محصولات موجود در فروشگاه</h4>
         <hr class="my-4">
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             {% for product in products %}
@@ -36,12 +36,12 @@
                         {% endif %}
                         <div class="badge bg-success text-white position-absolute" style="top: 0.5rem; left: 0.5rem">موجود</div>
                         <!-- Product image-->
-                        <img class="card-img-top" src="{{ product.pic.url }}" alt="..." />
+                        <img class="card-img-top" src="{{ product.pic.url }}" alt="..." style="width: 250px;"/>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <a href="{{ product.get_absolute_url }}" class="fw-bolder h5" style="text-decoration: none;">{{ product.name }}</a><br>
+                                <a href="{{ product.get_absolute_url }}" class="fw-bolder h6" style="text-decoration: none;">{{ product.name }}</a><br>
                                 <!-- product quantity -->
                                 <div class="row">
                                     <div class="col">
@@ -53,7 +53,7 @@
                                 </div>                                
                                 <!-- Product price-->
                                 <p>قیمت هر {{ product.unit }} {{ product.price }} تومان</p>
-                                <p class="fw-bolder">مقدار باقیمانده {{ product.inventory }} {{ product.unit }}</p>
+                                <p class="fw-bolder h6">مقدار باقیمانده {{ product.inventory }} {{ product.unit }}</p>
                             </div>
                         </div>
                         <!-- Product actions-->

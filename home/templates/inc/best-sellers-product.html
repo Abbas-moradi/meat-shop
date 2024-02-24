@@ -16,12 +16,12 @@
                         {% endif %}
                         <div class="badge bg-success text-white position-absolute" style="top: 0.5rem; left: 0.5rem">موجود</div>
                         <!-- Product image-->
-                        <img class="card-img-top" src="{{ product.pic.url }}" alt="..." />
+                        <img class="card-img-top" src="{{ product.pic.url }}" alt="..." style="width: 250px;"/>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <a href="{{ product.get_absolute_url }}" class="fw-bolder h5" style="text-decoration: none;">{{ product.name }}</a><br>
+                                <a href="{{ product.get_absolute_url }}" class="fw-bolder h6" style="text-decoration: none;">{{ product.name }}</a><br>
                                 <!-- product quantity -->
                                 <div class="row">
                                     <div class="col">
@@ -33,7 +33,7 @@
                                 </div>                                
                                 <!-- Product price-->
                                 <p>قیمت هر کیلو {{ product.price }} تومان</p>
-                                <p class="fw-bolder">مقدار باقیمانده {{ product.inventory }} کیلو</p>
+                                <p class="fw-bolder h6">مقدار باقیمانده {{ product.inventory }} کیلو</p>
                             </div>
                         </div>
                         <!-- Product actions-->

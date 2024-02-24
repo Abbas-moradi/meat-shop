@@ -11,6 +11,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+ .table {
+  max-height: 10px; 
+  overflow-y: auto; 
+}
 
  @media print {
   header, footer, .nav, .sidebar, .nav-link, .mini-nav {
