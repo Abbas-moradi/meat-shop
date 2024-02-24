@@ -12,7 +12,7 @@
        <br>
         <div class="row gutters" style="margin-left: 60px; margin-right: 60px;" dir="rtl">
             <div class="card h-100" >
-                <div class="card-body shadow-sm text-center">
+                <div class="card-body shadow-sm text-center" style="max-height: 350px; overflow-y: auto;">
                     <h6 class="btn rounded-pill" style="background-color:tomato">وضعیت سفارشات روز گذشته</h6>
                     <table class="table">
                         
@@ -25,7 +25,7 @@
                             <th scope="col">وضعیت پرداخت</th>
                             <th scope="col">وضعیت ارسال</th>
                             <th scope="col"> تاریخ </th>
-                            <th scope="col"> توضیحات </th>
+                            <th scope="col"> اعمال تغییرات </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,7 +34,7 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ ld.id }}</td>
                             <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
-                            <td>{{ ld.total_price }}</td>
+                            <td>{{ ld.total_price }} تومان</td>
                             <td>
                                 <select name="paid_status" class="form-select">
                                     <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
@@ -64,44 +64,56 @@
             </div>
         </div>
         
-        <br><br>
+        <br>
         <div class="row gutters" style="margin-left: 60px; margin-right: 60px;" dir="rtl">
             <div class="card h-100" >
-                <div class="card-body shadow-sm text-center">
+                <div class="card-body shadow-sm text-center" style="max-height: 350px; overflow-y: auto;">
                     <h6 class="btn rounded-pill" style="background-color:tomato">وضعیت سفارشات ماه گذشته</h6>
-                    <table class="table">
+                    <table class="table" >
                         
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">شماره فاکتور</th>
                             <th scope="col">کاربر</th>
                             <th scope="col">مبلغ خرید</th>
                             <th scope="col">وضعیت پرداخت</th>
                             <th scope="col">وضعیت ارسال</th>
                             <th scope="col"> تاریخ </th>
-                            <th scope="col"> توضیحات </th>
+                            <th scope="col"> اعمال تغییرات </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
                             {% for ld in last_month %}
+                        <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ ld.user }}</td>
-                            <td>{{ ld.total_price }}</td>
-                            <td>{{ ld.paid }}</td>
-                            <td>{{ ld.deliver }}</td>
+                            <td>{{ ld.id }}</td>
+                            <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
+                            <td>{{ ld.total_price }} تومان</td>
+                            <td>
+                                <select name="paid_status" class="form-select">
+                                    <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
+                                    <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="delivery_status" class="form-select">
+                                    <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
+                                    <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
+                                </select>                                
+                            </td>
                             <td>{{ ld.shamsi }}</td>
                             <td>
                                 <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
                                     <i class="bi bi-arrow-repeat"></i>
                                 </button>
                             </td>
-                            {% endfor %}
                         </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                     <div class="text-center">
-                        <p class="btn rounded-pill" style="background-color:cadetblue">مبلغ کل خرید موفق مشتریان : {{total_price_lasd_month}} تومان</p>
+                        <p class="btn rounded-pill" style="background-color:cadetblue">مبلغ کل خرید موفق مشتریان : {{ total_price_lasd_month }} تومان</p>
                     </div>
                 </div>
             </div>
@@ -112,32 +124,29 @@
             <div class="card h-100" >
                 <div class="card-body shadow-sm text-center">
                     <h6 class="btn rounded-pill" style="background-color:tomato">خلاصه وضعیت فروش</h6>
-                    <table class="table">
+                    <table class="table" style="max-height: 200px; overflow-y: auto;">
                         
                         <thead>
                         <tr>
                             <th scope="col">تعداد کاربران سایت</th>
                             <th scope="col">تعداد کل خرید موفق</th>
                             <th scope="col">تعداد کل خرید ناموفق </th>
-                            <th scope="col">مبلغ کل پرداخت شده </th>
+                            <th scope="col">مبلغ پرداخت شده موفق </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>1366</td>
-                            <td>356</td>
-                            <td>785460000 تومان</td>
+                            <th scope="row">{{ all_user }}</th>
+                            <td>{{ total_order_paid }}</td>
+                            <td>{{ total_unpaid_order }}</td>
+                            <td>{{ all_price }} تومان</td>
                         </tr>
                         </tbody>
                     </table>
-                    <div class="text-center">
-                        <p class="btn rounded-pill" style="background-color:cadetblue">مبلغ کل خرید موفق مشتریان : 15550000 تومان</p>
-                    </div>
                 </div>
             </div>
         </div>
-       
+       <br><br><br><br>
 
         {% if alert %}
         <div class="error-message">
@@ -158,8 +167,6 @@
             {% endfor %}
         {% endif %}
 
-
-        {% include 'footer.html' %}
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
