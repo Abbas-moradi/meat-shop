@@ -19,6 +19,7 @@
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">شماره فاکتور</th>
                             <th scope="col">کاربر</th>
                             <th scope="col">مبلغ خرید</th>
                             <th scope="col">وضعیت پرداخت</th>
@@ -31,23 +32,22 @@
                             {% for ld in last_day %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ ld.id }}</td>
                             <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
                             <td>{{ ld.total_price }}</td>
                             <td>
-                                {% if ld.paid %}
-                                <span class="badge bg-success text-black fw-bold">پرداخت شده</span>
-                                {% else %}
-                                <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
-                                {% endif %}
+                                <select name="paid_status" class="form-select">
+                                    <option value="paid" {% if ld.deliver %} selected {% endif %}>پرداخت شده</option>
+                                    <option value="unpaid" {% if not ld.deliver %} selected {% endif %}>پرداخت نشده</option>
+                                </select>
                             </td>
                             <td>
-                                {% if ld.deliver %}
-                                        <button type="button" class="btn btn-sm btn-success" data-toggle="popover" title="تحویل شده به آدرس:{{ ld.address }}">تحویل شده</button>
-                                        {% else %}
-                                        <span class="badge bg-warning text-black fw-bold">تحویل نشده</span>
-                                        {% endif %}
+                                <select name="delivery_status" class="form-select">
+                                    <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
+                                    <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
+                                </select>                                
                             </td>
-                            <td>{{ ld.created }}</td>
+                            <td>{{ ld.shamsi }}</td>
                             <td>
                                 <button class="btn btn-white border-secondary bg-white btn-md mb-2" type="submit" title="اعمال تغییرات">
                                     <i class="bi bi-arrow-repeat"></i>
