@@ -22,7 +22,7 @@
                             <p class="lead">{{ product.description }}</p>
                             <p class="lead fw-bolder">قیمت نهایی محصول {{ product.price }}  تومان</p>
                             <div class="d-flex">
-                                <input name="quantity" type="number" class="form-control form-control-sm text-center" value="{{ product.number }}" style="max-width: 3rem" />
+                                <input name="quantity" type="number" class="form-control form-control-sm text-center" value="{{ product.number }}" min="{{ product.number }}" style="max-width: 3rem" />
                                 <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                                     <i class="bi-cart-fill me-1"></i>
                                     افزودن به سبد خرید

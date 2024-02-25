@@ -11,10 +11,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
-
-
-
-
+ html * {
+  font-family:'A Iranian Sans', Helvetica, sans-serif;
+ }
 
  @media print {
   header, footer, .nav, .sidebar, .nav-link, .mini-nav {
