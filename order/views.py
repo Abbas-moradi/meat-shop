@@ -78,7 +78,7 @@ class UserReceipt(View):
 
         card = Card(request)
         item_in_card = 0
-        for itm in card:
+        for _ in card:
             item_in_card += 1
         if item_in_card == 0 :
             messages.success(request, 'سبد خرید شما خالی است')
@@ -105,9 +105,13 @@ class UserReceipt(View):
                 product_quantity=int(item['quantity']), total_price=int(item['total_price'],),
                 shamsi=shamsi_date
                 )
-            up_product = Product.objects.get(name=item['product'])
-            up_product.inventory -= int(item['quantity'])
-            up_product.save()
+            update_product = Product.objects.get(name=item['product'])
+            if update_product.inventory >= int(item['quantity']):
+                update_product.inventory -= int(item['quantity'])
+            else:
+                messages.error(request, f'متاسفانه محصول {update_product.name} به مقدار انتخابی شما موجود نیست.')
+                return redirect('order:shoping_card')
+            update_product.save()
 
         items = OrderItem.objects.filter(order=order.id)
         del request.session['card']
