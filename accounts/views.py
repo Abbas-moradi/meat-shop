@@ -95,8 +95,9 @@ class ProfileReceipt(View):
 class DeleteAddress(View):
     adrs_temp = 'inc/user-address.html'
 
-    def post(self, request):
-        print(request.POST['id'])
-        Address.objects.get(id=request.POST['id'])
-        user_address = Address.objects.filter(user=request.user)
-        return render(request, self.adrs_temp, {'address': user_address})
+    def post(self, request, id):
+        print(id)
+        # Address.objects.get(id=request.POST['id'])
+        # user_address = Address.objects.filter(user=request.user)
+        messages.success(request, 'آدرس مورد نظر حذف شد.')
+        return redirect('account:address')

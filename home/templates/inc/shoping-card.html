@@ -11,22 +11,22 @@
         -->
 
         <section class="pt-5 pb-5 bg-light">
-            <div class="container">
+            <div class="container text-center">
             <div class="row w-100">
                 <div class="col-lg-12 col-md-12 col-12">
                 {% if request.user.is_authenticated %}
-                    <h3 class="display-5 mb-2 text-center">سبد خرید {{ request.user.full_name }}</h3>
+                    <h3 class="display-7 mb-2 text-center">سبد خرید {{ request.user.full_name }}</h3>
                 {% else %}
-                    <h3 class="display-5 mb-2 text-center">سبد خرید شما</h3>
+                    <h3 class="display-7 mb-2 text-center">سبد خرید شما</h3>
                 {% endif %}
                     <p class="mb-5 text-center">
                         <i class="text-info font-bold">{{ item_number|length }}</i> تعداد اقلام کارت خرید شما</p>
                     <table id="shoppingCart" class="table table-condensed table-responsive">
                         <thead>
                             <tr>
-                                <th style="width:40%" class="text-center"> مشخصات محصول</th>
+                                <th style="width:30%"> مشخصات محصول</th>
                                 <th style="width:12%">قیمت</th>
-                                <th style="width:10%" class="text-center">تعداد</th>
+                                <th style="width:10%">مقدار</th>
                                 <th style="width:10%">قیمت کل</th>
                                 <th style="width:10%"> اعمال تغییرات</th>
                             </tr>
@@ -49,7 +49,7 @@
                                     </td>
                                     <td data-th="Price">{{ item.price }}</td>
                                     <td data-th="Quantity">
-                                        <input name="quantity" type="number" class="form-control form-control-sm text-center" value="{{ item.quantity }}" min="{{ item.limit }}">
+                                        <input name="quantity" type="number" class="form-control text-center" value="{{ item.quantity }}" min="{{ item.limit }}" style="width: 70px;" title="{{item.unit}}">
                                     </td>
                                     <td data-th="Price">{{ item.total_price }}</td>
                                     <td class="actions" data-th="">

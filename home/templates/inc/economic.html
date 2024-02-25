@@ -3,10 +3,10 @@
 {% if economic %}
 <section class="py-5 shadow rounded-3" style="background-color:yellowgreen;">
     <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4 text-center" style="color:red">محصولات اقتصادی</h2><br>
+        <h2 class="fw-bolder mb-4 text-center" style="color:orangered">محصولات اقتصادی</h2><br>
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in economic %}
-            <div class="col mb-5" >
+            <div class="col mb-5" style="font-size:small;">
                 <div class="card h-100 text-center">
                     <form action="{% url 'order:card_add' product.id %}" method="post">
                         {% csrf_token %}
@@ -32,8 +32,8 @@
                                     </div>
                                 </div>                                
                                 <!-- Product price-->
-                                <p>قیمت هر کیلو {{ product.price }} تومان</p>
-                                <p class="fw-bolder h6">مقدار باقیمانده {{ product.inventory }} کیلو</p>
+                                <p>قیمت هر {{ product.unit }} {{ product.price }} تومان</p>
+                                <p class="fw-bolder h6" style="font-size:small;">مقدار باقیمانده {{ product.inventory }} {{ product.unit }}</p>
                             </div>
                         </div>
                         <!-- Product actions-->

@@ -26,7 +26,7 @@
         <hr class="my-4">
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             {% for product in products %}
-            <div class="col mb-3" >
+            <div class="col mb-3" style="font-size:small;">
                 <div class="card h-100 text-center">
                     <form action="{% url 'order:card_add' product.id %}" method="post">
                         {% csrf_token %}
@@ -53,7 +53,7 @@
                                 </div>                                
                                 <!-- Product price-->
                                 <p>قیمت هر {{ product.unit }} {{ product.price }} تومان</p>
-                                <p class="fw-bolder h6">مقدار باقیمانده {{ product.inventory }} {{ product.unit }}</p>
+                                <p class="fw-bolder h6" style="font-size:small;">مقدار باقیمانده {{ product.inventory }} {{ product.unit }}</p>
                             </div>
                         </div>
                         <!-- Product actions-->

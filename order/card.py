@@ -27,7 +27,8 @@ class Card:
     def add(self, product, quantity):
         product_id = str(product.id)
         if product_id not in self.card:
-            self.card[product_id] = {'quantity': 0, 'price': str(product.price), 'limit': product.number}
+            self.card[product_id] = {'quantity': 0, 'price': str(product.price),
+                                     'limit': product.number, 'unit': product.unit}
         self.card[product_id]['quantity'] += quantity
         self.save()
 
