@@ -3,15 +3,18 @@
 <html lang="en">
     {% include 'header.html' %}
     <body>
-       {% include 'navigation.html' %}
-       {% include 'inc/site-header.html' %}
-       <nav aria-label="breadcrumb" >
-           <ol class="breadcrumb" ><a class="bi bi-geo-fill"></a>
-            <li class="breadcrumb-item"><a href="#">خانه</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> محصولات</li>
-        </ol>
-    </nav><br>
-
+        <div class="image-container adverb" style="background-image: url('{% static 'home/assets/img/gifmaker_me.gif' %}'); max-width: 1920px; height: 100px;">
+            <span class="close-icon btn">&times;</span>
+        </div>        
+        {% include 'navigation.html' %}
+        {% include 'inc/site-header.html' %}
+        <nav aria-label="breadcrumb" >
+            <ol class="breadcrumb" ><a class="bi bi-geo-fill"></a>
+                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page"> محصولات</li>
+            </ol>
+        </nav><br>
+        
         {% include 'inc/guarantee.html' %}
         {% include 'inc/product.html' %}
         <!-- Footer-->
@@ -19,7 +22,9 @@
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy;  www.Qasaab.ir 2023</p></div>
         </footer>
         {% include 'inc/economic.html' %}
-        <div class="image-container" style="background-image: url('{% static 'home/assets/img/gif-maker.gif' %}'); max-width: 1720px; height: 100px;"></div>
+        <div class="image-container adverb" style="background-image: url('{% static 'home/assets/img/maker(3).gif' %}'); max-width: 1920px; height: 100px;">
+            <span class="close-icon btn">&times;</span>
+        </div>
         {% include 'inc/best-sellers-product.html' %}
         
        
