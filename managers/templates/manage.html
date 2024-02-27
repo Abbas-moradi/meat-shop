@@ -40,14 +40,13 @@
                                     <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
                                     <td>{{ ld.total_price }} تومان</td>
                                     <td>
-                                        {% if ld.paid %}
-                                        <span class="badge bg-success text-black fw-bold">پرداخت شده</span>
-                                        {% else %}
-                                        <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
-                                        {% endif %}
+                                        <select name="paid_status" class="form-select" style="background-color: {% if ld.paid %}green{% else %}orange{% endif %}; color: white;" >
+                                            <option value="paid" {% if ld.paid %} selected {% endif %}>پرداخت شده</option>
+                                            <option value="unpaid" {% if not ld.paid %} selected {% endif %}>پرداخت نشده</option>
+                                        </select>
                                     </td>
                                     <td>
-                                        <select name="delivery_status" class="form-select">
+                                        <select name="delivery_status" class="form-select" style="background-color: {% if ld.deliver %}green{% else %}orange{% endif %}; color: white;" title="{% if ld.deliver %} تحویل شده به آدرس: {{ld.address}}{% endif %};">
                                             <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
                                             <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
                                         </select>                                
@@ -101,14 +100,13 @@
                                     <td><button class="btn btn-sm" data-toggle="popover" title="تلفن تماس:{{ ld.user }}">{{ ld.user.full_name }}</button></td>
                                     <td>{{ ld.total_price }} تومان</td>
                                     <td>
-                                        {% if ld.paid %}
-                                        <span class="badge bg-success text-black fw-bold">پرداخت شده</span>
-                                        {% else %}
-                                        <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
-                                        {% endif %}
+                                        <select name="paid_status" class="form-select" style="background-color: {% if ld.paid %}green{% else %}orange{% endif %}; color: white;">
+                                            <option value="paid" {% if ld.paid %} selected {% endif %}>پرداخت شده</option>
+                                            <option value="unpaid" {% if not ld.paid %} selected {% endif %}>پرداخت نشده</option>
+                                        </select>
                                     </td>
                                     <td>
-                                        <select name="delivery_status" class="form-select">
+                                        <select name="delivery_status" class="form-select" style="background-color: {% if ld.deliver %}green{% else %}orange{% endif %}; color: white;" title="{% if ld.deliver %} تحویل شده به آدرس: {{ld.address}}{% endif %};">
                                             <option value="delivered" {% if ld.deliver %} selected {% endif %}>تحویل شده</option>
                                             <option value="undelivered" {% if not ld.deliver %} selected {% endif %}>تحویل نشده</option>
                                         </select>                                

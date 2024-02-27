@@ -6,7 +6,7 @@ from order.models import Order, OrderItem
 from django.views import View
 from datetime import datetime
 from .card import Card
-from utils import convert_to_toman, convert_to_jalali
+from utils import convert_to_toman, convert_to_jalali, msg_sender
 from datetime import datetime
 
 
@@ -98,6 +98,11 @@ class UserReceipt(View):
             user=user, total_price=finally_price, finally_price=end_price,
             product_number=product_num,tax=tax,address=usadrs, shamsi=shamsi_date
         )
+        try:
+            msg_sender('09126818407', f' سفارشی با این کد ثبت شد {order.id} ، مبلغ سفارش  {order.finally_price}')
+            msg_sender(user.phone_number, f'{user.full_name} عزیز ، سفارش شما بدست ما رسید ، در اسرع وقت برای آماده سازی و ارسال آن اقدام و به شما اطلاع میدهیم. qasaab.ir')
+        except:
+            print('An error occurred while sending the message')
 
         for item in card:
             OrderItem.objects.create(

@@ -15,7 +15,7 @@ def convert_to_toman(number):
     return f'{toman_string} تومان'
 
 
-def otp_sender(phone, message):
+def msg_sender(phone, message):
     client = Client("ykD_Lp-isbx9Ka0KJUOjqcKa8OUE6CWdyBR5eOa_vvg=")
 
     try:

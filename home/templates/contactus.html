@@ -16,7 +16,7 @@
         <div class="container my-5" dir="rtl">
             <div class="row " style="margin-left: 0px; margin-right: 0px;">
                 <div class="card h-100" >
-                    <div class="card-body shadow-sm">
+                    <div class="card-body shadow-sm text-center">
                         <section class="mb-4">
 
                             <!--Section heading-->
@@ -25,12 +25,13 @@
                                 
                             </div>
                             <!--Section description-->
-                            <p class="text-center w-responsive mx-auto mb-5">آیا سؤالی دارید؟ ما به شما پیشنهاد می‌دهیم با ما در تماس مستقیم باشید. تیم ما در دسترس شماست و طی چند ساعت آینده به شما کمک خواهد کرد</p>
+                            <p class="w-responsive mx-auto mb-5 text-white btn" style="background-color: crimson;">آیا با مشکلی مواجه شده اید؟ جای نگرانی نیست ، کافیه به ما پیام بدید یا با ما تماس بگیرید.</p>
 
                             <div class="row">
 
                                 <!--Grid column-->
-                                <div class="col-md-9 mb-md-0 mb-5">
+                                <div class="col-md-9 mb-md-0 mb-5 rounded" style="border: 1px dashed #000;">
+                                    <br>
                                     <form action="" method="post">
                                     {% csrf_token %}
                                         <!--Grid row-->
@@ -81,8 +82,9 @@
                                         </div>
                                         <!--Grid row-->
                                         <br>
-                                        <button class="btn btn-primary" type="submit">ارسال پیام</button>
+                                        <button class="btn btn-primary" type="submit">ارسال پیام</button>    
                                     </form>
+                                    <br>
                                 </div>
                                 <!--Grid column-->
 

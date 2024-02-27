@@ -43,8 +43,11 @@ class Manage(UserPassesTestMixin, View):
     def post(self, request):
         order = Order.objects.get(id=request.POST['orderid'])
         delivery_status = request.POST.get('delivery_status')
+        paid_status = request.POST.get('paid_status')
         delivery_status = True if delivery_status == 'delivered' else False
+        paid_status = True if paid_status == 'paid' else False
         order.deliver = delivery_status
+        order.paid = paid_status
         order.save()
        
         messages.success(request, 'تغییرات شما اعمال شد. مدیر محترم لطفا در تغییرات دقت لازم را داشته باشید!')

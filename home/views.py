@@ -8,7 +8,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from order.models import OrderItem
 from django.db.models import Count
-from utils import otp_sender
+from utils import msg_sender
 from django.contrib import messages
 import random
 
@@ -70,7 +70,7 @@ class Register(View):
                     'password': request.POST['password2']
                     }
         message = f'کد تایید ثبت نام شما : {otp_code} \n www.Qasaab.ir'
-        otp_sender(request.POST['phone'], message)
+        msg_sender(request.POST['phone'], message)
         return render(request, self.otp_temp)
 
 
@@ -128,7 +128,7 @@ class Forgot(View):
             'user_phone': phone
         }
         message = f'اگر شما کد فراموشی رمز را درخواست نداده اید این پیام را نادیده بگیرید. \n کد تایید شما: {otp_code} \n www.Qasaab.ir'
-        otp_sender(phone, message)
+        msg_sender(phone, message)
         return render(request, self.forgot_temp)
 
     def post(self, request):
