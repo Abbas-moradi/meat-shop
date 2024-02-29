@@ -123,7 +123,7 @@
                     <div class="row">
                       <div class="col-xl-10">
                         <p style="color: rgb(103, 159, 47);">از خرید شما متشکریم</p>
-                        <p class="btn btn-danger" style="color: rgb(255, 255, 255);">در صورت نداشتن رمز دوم پویا جهت خرید، با تیم پشتیبانی تماس بگیرید</p>
+                        <a href="{% url 'home:contactus' %}" class="btn btn-danger" style="color: rgb(255, 255, 255);">در صورت نداشتن رمز دوم پویا جهت خرید، با تیم پشتیبانی تماس بگیرید</a>
                       </div>
                       <div class="col-xl-2">
                         {% if order.paid %}

@@ -6,6 +6,7 @@ from accounts.models import User, Address
 from django.contrib.auth.mixins import UserPassesTestMixin
 from datetime import date, timedelta, datetime
 from django.db.models import Q, Sum
+from utils import msg_sender
 
 
 class Manage(UserPassesTestMixin, View):
@@ -49,6 +50,8 @@ class Manage(UserPassesTestMixin, View):
         order.deliver = delivery_status
         order.paid = paid_status
         order.save()
+        if delivery_status == True:
+            msg_sender(order.user.phone_number, f'{order.user.full_name} عزیز ، سفارش شما آماده و در حال ارسال است و تا چند ساعت دیگر بدست شما میرسد. \n فروشگاه گوشت دامیران')
        
         messages.success(request, 'تغییرات شما اعمال شد. مدیر محترم لطفا در تغییرات دقت لازم را داشته باشید!')
         return redirect('manager:manage')
