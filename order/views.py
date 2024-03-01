@@ -100,7 +100,7 @@ class UserReceipt(View):
         )
         try:
             msg_sender('09126818407', f' سفارشی با این کد ثبت شد {order.id} ، مبلغ سفارش  {order.finally_price}')
-            msg_sender(user.phone_number, f'{user.full_name} عزیز ، سفارش شما بدست ما رسید ، در اسرع وقت برای آماده سازی و ارسال آن اقدام و به شما اطلاع میدهیم. qasaab.ir')
+            msg_sender(user.phone_number, f'{user.full_name} عزیز ، سفارش شما بدست ما رسید ، در اسرع وقت برای آماده سازی و ارسال آن اقدام و به شما اطلاع میدهیم.\n www.qasaab.ir')
         except:
             print('An error occurred while sending the message')
 
