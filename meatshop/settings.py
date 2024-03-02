@@ -145,3 +145,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+# Zarinpal Setting Section
+from dotenv import load_dotenv
+
+load_dotenv()
+
+MERCHANT  =  os.getenv('MERCHANT')
+
+SANDBOX  =  True

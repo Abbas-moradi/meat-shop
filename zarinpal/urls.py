@@ -1,7 +1,9 @@
 from django.urls import path
-from . import views
+from zarinpal import views
+
+app_name = 'zarinpal'
 
 urlpatterns = [
-    path('request/', views.send_request, name='request'),
-    path('verify/', views.verify , name='verify'),
+    path('request/', views.Zarinpal.as_view(), name='request'),
+    path('verify/', views.CallbackUrl.as_view() , name='verify'),
 ]

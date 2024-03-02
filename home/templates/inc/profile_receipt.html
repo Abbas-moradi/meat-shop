@@ -128,8 +128,8 @@
                       <div class="col-xl-2">
                         {% if order.paid %}
                         {% else %}
-                        <button type="button" class="btn text-white text-capitalize"
-                          style="background-color:#60bdf3 ;"> پرداخت صورتحساب</button>
+                        <a href="{% url 'zarinpal:request' %}" type="button" class="btn text-white text-capitalize"
+                          style="background-color:#60bdf3 ;"> پرداخت صورتحساب</a>
                         {% endif %}
                       </div>
                     </div>
