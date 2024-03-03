@@ -104,11 +104,6 @@ class UserReceipt(View):
             user=user, total_price=finally_price, finally_price=end_price,
             product_number=product_num,tax=tax,address=usadrs, shamsi=shamsi_date
         )
-        try:
-            msg_sender('09126818407', f' سفارشی با این کد ثبت شد {order.id} ، مبلغ سفارش  {order.finally_price}')
-            msg_sender(user.phone_number, f'{user.full_name} عزیز ، سفارش شما بدست ما رسید ، در اسرع وقت برای آماده سازی و ارسال آن اقدام و به شما اطلاع میدهیم.\n www.qasaab.ir')
-        except:
-            print('An error occurred while sending the message')
 
         for item in card:
             OrderItem.objects.create(
@@ -136,10 +131,11 @@ class OrderPay(View):
     currency = "IRR"
     description = "فروشگاه گوشت دامیران"
 
-
-
     def get(self, request, order_id):
         order = Order.objects.get(id=order_id, paid=False)
+        request.session['order_pay'] = {
+            'order_id': order.id,
+        }
 
         metadata = {
             "mobile": request.user.phone_number,  # Buyer phone number Must start with 09
@@ -181,4 +177,45 @@ class OrderPay(View):
             data = json.dumps({'status': False, 'code': 'اتصال برقرار نشد'})
             return HttpResponse(data)
 
-        
+
+class OrderPayVerify(View):
+
+    def get(self, request):
+        authority = request.GET.get('Authority')
+        status = request.GET.get('Status')
+        order_id = request.session['order_pay']['order_id']
+        order = Order.objects.get(id=order_id, paid=False)
+
+        if status == "NOK":
+            return HttpResponse(json.dumps({'status': "پرداخت ناموفق"}))
+        data = {
+            "merchant_id": settings.MERCHANT,
+            "amount": order.total_price,
+            "authority": authority,
+        }
+        data = json.dumps(data)
+        headers = {'content-type': 'application/json', 'accept': 'application/json'}
+        try:
+            response = requests.post(settings.ZP_API_VERIFY, data=data, headers=headers)
+            response = response.json()
+            err = response["errors"]
+            if err:
+                return JsonResponse(err, content_type="application/json",safe=False)
+            if response['data']['code'] == 100:
+                data = json.dumps({'status': True, 'first_time_verify': True, 'ref_id': response['data']['ref_id']})
+                order.paid = True
+                order.save()
+                user = User.objects.get(phone_number=request.user)
+                try:
+                    msg_sender('09126818407', f' سفارشی با این کد ثبت شد {order.id} ، مبلغ سفارش  {order.finally_price}')
+                    msg_sender(user.phone_number, f'{user.full_name} عزیز ، سفارش شما بدست ما رسید ، در اسرع وقت برای آماده سازی و ارسال آن اقدام و به شما اطلاع میدهیم.\n www.qasaab.ir')
+                except:
+                    print('An error occurred while sending the message')
+
+            else:
+                data = json.dumps({'status': False, 'data': response})
+            return JsonResponse(data, safe=False)
+
+        except requests.exceptions.ConnectionError:
+            data = json.dumps({'status': False, 'code': 'اتصال برقرار نشد'})
+            return HttpResponse(data)

@@ -11,4 +11,5 @@ urlpatterns = [
     path('card/add/<int:product_id>/', views.CardAddProduct.as_view(), name='card_add'),
     path('receipt/', views.UserReceipt.as_view(), name='receipt'),
     path('pay/<int:order_id>/', views.OrderPay.as_view(), name='order_pay'),
+    path('verify/', views.OrderPayVerify.as_view(), name='order_verify'),
 ]
