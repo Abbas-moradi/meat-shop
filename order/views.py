@@ -8,6 +8,12 @@ from datetime import datetime
 from .card import Card
 from utils import convert_to_toman, convert_to_jalali, msg_sender
 from datetime import datetime
+from django.contrib.auth.mixins import UserPassesTestMixin
+from meatshop import settings
+import json
+import requests
+from django.http import HttpResponse , JsonResponse
+
 
 
 class ShopingCard(View):
@@ -122,3 +128,57 @@ class UserReceipt(View):
         del request.session['card']
         toman = convert_to_toman(int(order.finally_price))
         return render(request, self.receipt_temp, {'order': order, 'items': items, 'toman': toman}) 
+    
+
+class OrderPay(View):
+
+    CallbackURL = 'http://127.0.0.1:8000/order/verify/'
+    currency = "IRR"
+    description = "فروشگاه گوشت دامیران"
+
+
+
+    def get(self, request, order_id):
+        order = Order.objects.get(id=order_id, paid=False)
+
+        metadata = {
+            "mobile": request.user.phone_number,  # Buyer phone number Must start with 09
+            "email": request.user.email,  # Buyer Email
+            "order_id": str(order.id),  # Order Id
+        }
+
+        data = {
+            "merchant_id": settings.MERCHANT,
+            "amount": order.finally_price*10,
+            "currency": self.currency,
+            "description": self.description,
+            "callback_url": self.CallbackURL,
+            "metadata": metadata
+        }
+
+        data = json.dumps(data)
+        # set content length by data
+        headers = {'content-type': 'application/json', 'accept': 'application/json'}
+
+        try:
+            response = requests.post(
+                settings.ZP_API_REQUEST, data=data, headers=headers, timeout=10)
+            response = response.json()
+            err = response["errors"]
+            if err:
+                return JsonResponse(err, content_type="application/json",safe=False)
+            if response['data']['code'] == 100:
+                url = settings.ZP_API_STARTPAY + str(response['data']['authority'])
+                return redirect(url)
+            else:
+                return JsonResponse(json.dumps({'status': False, 'code': str(response['data']['code'])}), safe=False)
+            return JsonResponse(response)
+
+        except requests.exceptions.Timeout:
+            data = json.dumps({'status': False, 'code': 'timeout'})
+            return HttpResponse(data)
+        except requests.exceptions.ConnectionError:
+            data = json.dumps({'status': False, 'code': 'اتصال برقرار نشد'})
+            return HttpResponse(data)
+
+        

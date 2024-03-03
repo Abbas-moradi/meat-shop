@@ -1,71 +1,91 @@
-from django.views import View
+from django.http import HttpResponse , JsonResponse
 from meatshop import settings
 import requests
 import json
 
+from django.shortcuts import redirect
+
+ZP_API_REQUEST = "https://api.zarinpal.com/pg/v4/payment/request.json"
+ZP_API_VERIFY = "https://api.zarinpal.com/pg/v4/payment/verify.json"
+ZP_API_STARTPAY = "https://www.zarinpal.com/pg/StartPay/"
+
+# Optional Data
+metadata = {
+	"mobile": "09126818407",  # Buyer phone number Must start with 09
+	"email": "example@example.com",  # Buyer Email
+	"order_id": "1234",  # Order Id
+}
+currency = "IRR"  # or "IRT"
+
+# کد مرچنت خود را در فایل settings وارد کنید
+
+# Required Data
+amount = 20000  # Based on your currency
+description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"
+CallbackURL = 'http://127.0.0.1:8000/zarinpal/verify/'
 
 
-ZP_API_REQUEST = f"https://api.zarinpal.com/pg/v4/payment/request.json"
-ZP_API_VERIFY = f"https://www.zarinpal.com/pg/rest/WebGate/PaymentVerification.json"
-ZP_API_STARTPAY = f"https://www.zarinpal.com/pg/StartPay/"
-
-amount = 100000  # Rial / Required
-description = "فروشگاه گوشت دامیران"  # Required
-phone = '09126818407'  # Optional
-# Important: need to edit for realy server.
-CallbackURL = 'http://127.0.0.1:8080/zarinpal/verify/'
+# Important: need to edit for a real server.
 
 
-class Zarinpal(View):
-    def get(self, request):
-        data = {
-                "MerchantID": settings.MERCHANT,
-                "Amount": int(amount),
-                "CallbackURL": CallbackURL,
-                "Description": description,                                    
-                "metadata": {"mobile": phone,"email": "info.test@gmail.com"},
-            }
-        
-        data_main = json.dumps(data)
-        print('#'*10, data_main)
-        # set content length by data
-        headers = {'content-type': 'application/json', 'content-length': str(len(data)) }
-        try:
-            response = requests.post(ZP_API_REQUEST, data=data_main ,headers=headers, timeout=10)
+def send_request(request):
+	data = {
+		"merchant_id": settings.MERCHANT,
+		"amount": amount,
+		"currency": currency,
+		"description": description,
+		"callback_url": CallbackURL,
+		"metadata": metadata
+	}
+	data = json.dumps(data)
+	# set content length by data
+	headers = {'content-type': 'application/json', 'accept': 'application/json'}
+	try:
+		response = requests.post(
+			ZP_API_REQUEST, data=data, headers=headers, timeout=10)
+		response = response.json()
+		err = response["errors"]
+		if err:
+			return JsonResponse(err, content_type="application/json",safe=False)
+		if response['data']['code'] == 100:
+			url = ZP_API_STARTPAY + str(response['data']['authority'])
+			return redirect(url)
+		else:
+			return JsonResponse(json.dumps({'status': False, 'code': str(response['data']['code'])}), safe=False)
+		return JsonResponse(response)
 
-            if response.status_code == 200:
-                response = response.json()
-                print(response, '#*'*20)
-                if response['Status'] == 100:
-                    print('ok')
-                    # return {'status': True, 'url': ZP_API_STARTPAY + str(response['Authority']), 'authority': response['Authority']}
-                else:
-                    print('nok')
-                    # return {'status': False, 'code': str(response['Status'])}
-            return response
-        
-        except requests.exceptions.Timeout:
-            return {'status': False, 'code': 'timeout'}
-        except requests.exceptions.ConnectionError:
-            return {'status': False, 'code': 'connection error'}
+	except requests.exceptions.Timeout:
+		data = json.dumps({'status': False, 'code': 'timeout'})
+		return HttpResponse(data)
+	except requests.exceptions.ConnectionError:
+		data = json.dumps({'status': False, 'code': 'اتصال برقرار نشد'})
+		return HttpResponse(data)
 
 
-class CallbackUrl(View):
-    def post(self, request, authority):
-        data = {
-            "MerchantID": settings.MERCHANT,
-            "Amount": amount,
-            "Authority": authority,
-        }
-        data = json.dumps(data)
-        # set content length by data
-        headers = {'content-type': 'application/json', 'content-length': str(len(data)) }
-        response = requests.post(ZP_API_VERIFY, data=data,headers=headers)
+def verify(request):
+	authority = request.GET.get('Authority')
+	status = request.GET.get('Status')
+	if status == "NOK":
+		return HttpResponse(json.dumps({'status': "پرداخت ناموفق"}))
+	data = {
+		"merchant_id": settings.MERCHANT,
+		"amount": amount,
+		"authority": authority,
+	}
+	data = json.dumps(data)
+	headers = {'content-type': 'application/json', 'accept': 'application/json'}
+	try:
+		response = requests.post(ZP_API_VERIFY, data=data, headers=headers)
+		response = response.json()
+		err = response["errors"]
+		if err:
+			return JsonResponse(err, content_type="application/json",safe=False)
+		if response['data']['code'] == 100:
+			data = json.dumps({'status': True, 'first_time_verify': True, 'ref_id': response['data']['ref_id']})
+		else:
+			data = json.dumps({'status': False, 'data': response})
+		return JsonResponse(data, safe=False)
 
-        if response.status_code == 200:
-            response = response.json()
-            if response['Status'] == 100:
-                return {'status': True, 'RefID': response['RefID']}
-            else:
-                return {'status': False, 'code': str(response['Status'])}
-        return response
+	except requests.exceptions.ConnectionError:
+		data = json.dumps({'status': False, 'code': 'اتصال برقرار نشد'})
+		return HttpResponse(data)
