@@ -68,9 +68,9 @@
                           <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> 
                             <span class="me-1 fw-bold">وضعیت ارسال:</span>
                             {% if order.deliver %}
-                            <button type="button" class="btn btn-sm btn-success" data-toggle="popover" title="تحویل شده به آدرس:{{ order.address }}">تحویل شده</button>
+                            <button type="button" class="btn btn-sm btn-success" data-toggle="popover" title="ارسال شده به آدرس:{{ order.address }}">ارسال شده</button>
                             {% else %}
-                            <span class="badge bg-warning text-black fw-bold">تحویل نشده</span>
+                            <span class="badge bg-warning text-black fw-bold"> در حال ارسال</span>
                             {% endif %}
                           </li>
                         </ul>

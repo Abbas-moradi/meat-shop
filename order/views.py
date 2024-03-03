@@ -145,7 +145,7 @@ class OrderPay(View):
 
         data = {
             "merchant_id": settings.MERCHANT,
-            "amount": order.finally_price*10,
+            "amount": order.finally_price,
             "currency": self.currency,
             "description": self.description,
             "callback_url": self.CallbackURL,
@@ -179,6 +179,7 @@ class OrderPay(View):
 
 
 class OrderPayVerify(View):
+    conf_temp = 'inc/confirm-payment.html'
 
     def get(self, request):
         authority = request.GET.get('Authority')
@@ -187,7 +188,8 @@ class OrderPayVerify(View):
         order = Order.objects.get(id=order_id, paid=False)
 
         if status == "NOK":
-            return HttpResponse(json.dumps({'status': "پرداخت ناموفق"}))
+            data = {'status': "پرداخت ناموفق", 'order_id': order.id}
+            return render(request, self.conf_temp, {'NOK': data})
         data = {
             "merchant_id": settings.MERCHANT,
             "amount": order.total_price,
@@ -200,9 +202,13 @@ class OrderPayVerify(View):
             response = response.json()
             err = response["errors"]
             if err:
-                return JsonResponse(err, content_type="application/json",safe=False)
+                content_type="application/json"
+                data = {'errore': err, 'type': content_type, 'safe': False}
+                return render(request, self.conf_temp, {'err': data})
             if response['data']['code'] == 100:
-                data = json.dumps({'status': True, 'first_time_verify': True, 'ref_id': response['data']['ref_id']})
+                data = {'status': True, 'first_time_verify': True, 'ref_id': response['data']['ref_id'],
+                        'date': str(order.shamsi + ' در ساعت ' + datetime.today().strftime('%H:%M:%S')),
+                        'price': order.total_price, 'num': order.id}
                 order.paid = True
                 order.save()
                 user = User.objects.get(phone_number=request.user)
@@ -210,12 +216,12 @@ class OrderPayVerify(View):
                     msg_sender('09126818407', f' سفارشی با این کد ثبت شد {order.id} ، مبلغ سفارش  {order.finally_price}')
                     msg_sender(user.phone_number, f'{user.full_name} عزیز ، سفارش شما بدست ما رسید ، در اسرع وقت برای آماده سازی و ارسال آن اقدام و به شما اطلاع میدهیم.\n www.qasaab.ir')
                 except:
-                    print('An error occurred while sending the message')
+                    messages.error(request, 'در ارسال پیام کوتاه مشکلی پیش آمد')
 
             else:
-                data = json.dumps({'status': False, 'data': response})
-            return JsonResponse(data, safe=False)
+                data = {'status': False, 'data': response}
+            return render(request, self.conf_temp, {'data': data})
 
         except requests.exceptions.ConnectionError:
-            data = json.dumps({'status': False, 'code': 'اتصال برقرار نشد'})
-            return HttpResponse(data)
+            data = {'status': False, 'code': 'اتصال برقرار نشد'}
+            return render(request, self.conf_temp, {'NTCT': data})
