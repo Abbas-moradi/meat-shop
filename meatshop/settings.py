@@ -148,6 +148,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 
 # Zarinpal Setting Section
+
 from dotenv import load_dotenv
 
 load_dotenv()

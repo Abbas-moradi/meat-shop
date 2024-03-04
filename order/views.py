@@ -130,6 +130,7 @@ class OrderPay(View):
     CallbackURL = 'http://127.0.0.1:8000/order/verify/'
     currency = "IRR"
     description = "فروشگاه گوشت دامیران"
+    temp = 'inc/confirm-payment.html'
 
     def get(self, request, order_id):
         order = Order.objects.get(id=order_id, paid=False)
@@ -174,8 +175,8 @@ class OrderPay(View):
             data = json.dumps({'status': False, 'code': 'timeout'})
             return HttpResponse(data)
         except requests.exceptions.ConnectionError:
-            data = json.dumps({'status': False, 'code': 'اتصال برقرار نشد'})
-            return HttpResponse(data)
+            data = {'status': False, 'code': 'اتصال برقرار نشد'}
+            return render(request, self.temp, {'NTCT': data})
 
 
 class OrderPayVerify(View):
@@ -210,6 +211,7 @@ class OrderPayVerify(View):
                         'date': str(order.shamsi + ' در ساعت ' + datetime.today().strftime('%H:%M:%S')),
                         'price': order.total_price, 'num': order.id}
                 order.paid = True
+                order.ref_id = response['data']['ref_id']
                 order.save()
                 user = User.objects.get(phone_number=request.user)
                 try:
