@@ -8,6 +8,7 @@
         </div>        
         {% include 'navigation.html' %}
         {% include 'inc/site-header.html' %}
+        <br>
         <nav aria-label="breadcrumb" >
             <ol class="breadcrumb" ><a class="bi bi-geo-fill"></a>
                 <li class="breadcrumb-item"><a href="#">خانه</a></li>
@@ -16,6 +17,19 @@
         </nav><br>
         
         {% include 'inc/guarantee.html' %}
+
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                {% include 'inc/cow-carousel.html' %}
+            </div>
+            <div class="col-md-2">
+                {% include 'inc/sheep-carousel.html' %}
+            </div>
+            <div class="col-md-2">
+                {% include 'inc/economic-carousel.html' %}
+            </div>
+        </div>
+
         {% include 'inc/product.html' %}
         <!-- Footer-->
         <footer class="py-3" style="background-color:black">

@@ -1,0 +1,18 @@
+{% load static %}
+<div id="carouselExampleSlidesOnly" class="carousel slide text-center rounded" data-bs-ride="carousel" style="width: 250px; border: 1px dashed #767676;"><div class="text-white" style="background-color: tomato;">گوشت گوسفندی</div>
+    <div class="carousel-inner">
+        {% for product in products %}
+        {% if product.category.name == 'گوشت گوسفندی' %}
+        <div class="carousel-item active">
+            <img src="{{ product.pic.url }}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <div style="background-color: rgba(255, 0, 0, 0.050); padding: 5px; border-radius: 5px;  backdrop-filter: blur(10px);">
+                    <a href="{{ product.get_absolute_url }}" class="text-white h5" style="text-decoration: none;">{{ product.name }}</a>
+                </div>                
+                <p class="text-white" style="background-color: rgba(255, 0, 0, 0.050); padding: 5px; border-radius: 5px;  backdrop-filter: blur(10px);">قیمت {{ product.price }} تومان</p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
