@@ -1,5 +1,5 @@
 from django.contrib import admin
-from product.models import Product, Category
+from product.models import Product, Category, ProductComment
 
 
 @admin.register(Product)
@@ -11,3 +11,8 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug','description', 'created', 'status']
+
+
+@admin.register(ProductComment)
+class ProductCommentAdmin(admin.ModelAdmin):
+    list_display = ['user', 'product', 'created', 'updated', 'status']
