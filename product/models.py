@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from accounts.models import User 
 
 
 class Product(models.Model):
@@ -49,3 +50,20 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return f'{self.name}'
+    
+
+class ProductComment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'comment'
+        verbose_name_plural = 'comments'
+        ordering = ('created',)
+
+    def __str__(self) -> str:
+        return f'{self.user} - {self.comment}'
