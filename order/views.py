@@ -146,7 +146,7 @@ class OrderPay(View):
 
         data = {
             "merchant_id": settings.MERCHANT,
-            "amount": order.finally_price,
+            "amount": order.finally_price*10,
             "currency": self.currency,
             "description": self.description,
             "callback_url": self.CallbackURL,
