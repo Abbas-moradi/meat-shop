@@ -34,9 +34,14 @@
 
         {% include 'inc/product.html' %}
         <!-- Footer-->
-        <div class="image-container adverb" style="background-image: url('{% static 'home/assets/img/249006-3794 copy.jpg' %}');">
-            <span class="close-icon btn">&times;</span>
-        </div>
+        <div class="row-cols-md-2" style="height: 200px;">
+            <div class="image-container adverb" style="background-image: url('{% static 'home/assets/img/249006-3794 copy.jpg' %}'); background-size: 100% 100%;">
+                <span class="close-icon btn">&times;</span>
+            </div>
+            <div class="image-container adverb" style="background-image: url('{% static 'home/assets/img/249006-3794 copy.jpg' %}'); background-size: 100% 100%;">
+                <span class="close-icon btn">&times;</span>
+            </div>
+        </div>        
         {% include 'inc/economic.html' %}
         <div class="image-container adverb" style="background-image: url('{% static 'home/assets/img/maker(3).gif' %}'); max-width: 1920px; height: 100px;">
             <span class="close-icon btn">&times;</span>
