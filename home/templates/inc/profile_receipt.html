@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-xl-3 float-end">
                       <a onclick="printPage()" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
-                          class="fas fa-print text-primary"></i> Print</a>
+                          class="bi bi-print text-primary"></i> Print</a>
                       <a class="btn btn-light text-capitalize" data-mdb-ripple-color="dark"><i
                           class="far fa-file-pdf text-danger"></i> Export</a>
                     </div>
@@ -47,17 +47,17 @@
                         <ul class="list-unstyled">
                           <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{ request.user.full_name }}</span></li>
                           <li class="text-muted">{{ order.address }}</li>
-                          <li class="text-muted"><i class="fas fa-phone"></i>{{ request.user.phone_number }}</li>
+                          <li class="text-muted"><i class="bi bi-phone"></i>{{ request.user.phone_number }}</li>
                         </ul>
                       </div>
                       <div class="col-xl-4">
                         <p class="text-muted">صورتحساب</p>
                         <ul class="list-unstyled">
-                          <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                          <li class="text-muted"><i class="bi bi-circle" style="color:#84B0CA ;"></i> <span
                               class="fw-bold">ID:</span>#{{ order.id }}</li>
-                          <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                          <li class="text-muted"><i class="bi bi-circle" style="color:#84B0CA ;"></i> <span
                               class="fw-bold">تاریخ موثر: </span>{{ order.shamsi }}</li>
-                          <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> 
+                          <li class="text-muted"><i class="bi bi-circle" style="color:#84B0CA ;"></i> 
                             <span class="me-1 fw-bold">وضعیت:</span>
                             {% if order.paid %}
                             <span class="badge bg-success text-black fw-bold">پرداخت شده</span>
@@ -65,7 +65,7 @@
                             <span class="badge bg-warning text-black fw-bold">پرداخت نشده</span>
                             {% endif %}
                           </li>
-                          <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> 
+                          <li class="text-muted"><i class="bi bi-circle" style="color:#84B0CA ;"></i> 
                             <span class="me-1 fw-bold">وضعیت ارسال:</span>
                             {% if order.deliver %}
                             <button type="button" class="btn btn-sm btn-success" data-toggle="popover" title="ارسال شده به آدرس:{{ order.address }}">ارسال شده</button>

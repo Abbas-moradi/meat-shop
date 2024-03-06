@@ -4,8 +4,9 @@
 <section class="py-5 shadow rounded-3" style="background-image: url('{% static 'home/assets/img/background.jpg' %}');">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="text-center">
-            <h2 class="btn btn-danger fw-bolder mb-4 text-center" style="color:rgb(255, 255, 255)">پرفروش ترین محصولات </h2>
+            <h2 class="btn btn-danger btn-lg mb-4 text-center" style="color:rgb(255, 255, 255)">پرفروش ترین محصولات </h2>
         </div>
+        <br><br>
         <div id="best-sellers" class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in best_sellers %}
             <div class="col mb-5" style="font-size:small;">

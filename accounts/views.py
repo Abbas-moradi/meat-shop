@@ -46,22 +46,22 @@ class UserAddress(View):
         if ex_address:
             Address.objects.create(
                 user = request.user,
-                city = request.POST.get('city'),
-                neighbourhood = request.POST['neighbourhood'],
-                street = request.POST['street'],
-                alley = request.POST['alley'],
-                building = request.POST['building']
+                city = ' شهر '+ request.POST.get('city'),
+                neighbourhood = ' محله '+ request.POST['neighbourhood'],
+                street = ' خیابان '+ request.POST['street'],
+                alley = ' کوچه '+ request.POST['alley'],
+                building = ' ساختمان '+ request.POST['building']
             )
         else:
                 Address.objects.create(
-                user = request.user,
-                city = request.POST.get('city'),
-                neighbourhood = request.POST['neighbourhood'],
-                street = request.POST['street'],
-                alley = request.POST['alley'],
-                building = request.POST['building'],
-                main = True
-            )
+                    user = request.user,
+                    city = ' شهر '+ request.POST.get('city'),
+                    neighbourhood = ' محله '+ request.POST['neighbourhood'],
+                    street = ' خیابان '+ request.POST['street'],
+                    alley = ' کوچه '+ request.POST['alley'],
+                    building = ' ساختمان '+ request.POST['building'],
+                    main = True
+                )
         messages.success(request, 'آدرس شما با موفقیت ثبت شد')
         user_address = Address.objects.filter(user=request.user)
         return render(request, self.adrs_temp, {'address': user_address})
