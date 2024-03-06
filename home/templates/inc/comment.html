@@ -1,0 +1,63 @@
+{% load static %}
+<!-- Comment Section Start -->
+<div class="container" dir="rtl">
+    <div class="row justify-content-center">
+        <div class="card shadow rounded" style="border: 1px dashed #767676;">
+            <div class="be-comment-block">
+                <h1 class="text-center">نظرات (3)</h1><br><br>
+                <div class="be-comment">
+                    <div class="be-comment-content">
+                        
+                            <span class="be-comment-name">Ravi Sah</span>
+                            <span class="be-comment-time">
+                                <i class="fa fa-clock-o"></i>
+                                May 27, 2015 at 3:14am
+                            </span>
+
+                        <p class="be-comment-text">
+                            Pellentesque gravida tristique ultrices. 
+                            Sed blandit varius mauris, vel volutpat urna hendrerit id. 
+                            Curabitur rutrum dolor gravida turpis tristique efficitur.
+                        </p>
+                    </div>
+                </div>
+                <div class="be-comment">
+                    <div class="be-comment-content">
+                        <span class="be-comment-name">Ravi Sah</span>
+                        <span class="be-comment-time">
+                            <i class="fa fa-clock-o"></i>
+                            May 27, 2015 at 3:14am
+                        </span>
+                        <p class="be-comment-text">
+                            Nunc ornare sed dolor sed mattis. In scelerisque dui a arcu mattis, at maximus eros commodo. Cras magna nunc, cursus lobortis luctus at, sollicitudin vel neque. Duis eleifend lorem non ant. Proin ut ornare lectus, vel eleifend est. Fusce hendrerit dui in turpis tristique blandit.
+                        </p>
+                    </div>
+                </div>
+                <div class="be-comment">
+                    <div class="be-comment-content">
+                        <span class="be-comment-name">Ravi Sah</span>
+                        <span class="be-comment-time">
+                            <i class="fa fa-clock-o"></i>
+                            May 27, 2015 at 3:14am
+                        </span>
+                        <p class="be-comment-text">
+                            Cras magna nunc, cursus lobortis luctus at, sollicitudin vel neque. Duis eleifend lorem non ant
+                        </p>
+                    </div>
+                </div>
+                <form class="form-block">
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">ثبت نظرات</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="لطفا نظر خود را در این قسمت بنویسید"></textarea>
+                    </div>
+
+                    {% if request.user.is_authenticated %}
+                    <button type="submit" class="btn btn-outline-secondary">ثبت نظر</button>
+                    {% else %}
+                    <p>برای ثبت نظر <a href="{% url 'home:login' %}">وارد</a> شوید ، اگر ثبت نام نکرده اید از <a href="{% url 'home:register' %}"> اینجا </a>ثبت نام کنید</p>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

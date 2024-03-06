@@ -58,6 +58,7 @@ class ProductComment(models.Model):
     comment = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    shamsi = models.CharField(max_length=150)
     status = models.BooleanField(default=False)
 
     class Meta:
