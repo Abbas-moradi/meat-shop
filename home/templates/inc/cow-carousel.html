@@ -1,6 +1,6 @@
 {% load static %}
-<div id="carouselExampleSlidesOnly" class="carousel slide text-center rounded-3" data-bs-ride="carousel" style="width: 250px; border: 1px dashed #767676;"><div class="text-white" style="background-color:slateblue;">گوشت گاوی</div> 
-    <div class="carousel-inner">
+<div id="carouselExampleSlidesOnly" class="carousel slide text-center rounded-3" data-bs-ride="carousel" style="width: 250px; border: 1px dashed #000000; background-color: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);"><div class="text-white">گوشت گاوی</div> 
+    <div class="carousel-inner rounded">
         {% for product in products %}
         {% if product.category.name == 'گوشت گوساله' %}
         <div class="carousel-item active">

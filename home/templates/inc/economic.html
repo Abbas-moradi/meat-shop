@@ -1,13 +1,15 @@
 {% load static %}
 <!-- Economic items section -->
 {% if economic %}
-<section class="py-5 shadow rounded-3" style="background-color:yellowgreen;">
+<section class="py-5 shadow rounded-3" style="background-image: url('{% static 'home/assets/img/12739.jpg' %}');">
     <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4 text-center" style="color:orangered">محصولات اقتصادی</h2><br>
+        <div class="text-center">
+            <h4 class="btn btn-danger fw-bolder rounded" style="color: rgb(255, 255, 255);">محصولات اقتصادی</h4>
+        </div>
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for product in economic %}
             <div class="col mb-5" style="font-size:small;">
-                <div class="card h-100 text-center">
+                <div class="card h-100 text-center text-white" style="background-color: rgba(255, 0, 0, 0.050); padding: 5px; border-radius: 5px;  backdrop-filter: blur(10px);">
                     <form action="{% url 'order:card_add' product.id %}" method="post">
                         {% csrf_token %}
                         {% if product.economic %}
