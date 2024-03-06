@@ -1,6 +1,6 @@
 {% load static %}
 <!-- Product Section Start -->
-<section class="py-5">
+<section class="py-5" style="background-image: url('{% static 'home/assets/img/S1.jpg' %}');">
     <div class="container px-4 px-lg-5 mt-5">
         {% if not products %}
         <!-- Confirm Payment Start -->
@@ -22,12 +22,14 @@
         </section>
         <!-- Confirm Payment End -->
         {% else %}
-        <h4 class="fw-bolder text-center" style="color: red;">محصولات موجود در فروشگاه</h4>
-        <hr class="my-4">
+        <div class="text-center">
+            <h4 class="btn btn-danger fw-bolder rounded" style="color: rgb(255, 255, 255);">محصولات موجود در فروشگاه</h4>
+        </div>
+        <hr class="my-4" >
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
             {% for product in products %}
-            <div class="col mb-3" style="font-size:small;">
-                <div class="card h-100 text-center">
+            <div class="col mb-3 " style="font-size:small; padding-top: 10px;">
+                <div class="card h-100 text-center text-white" style="background-color: rgba(255, 0, 0, 0.050); padding: 5px; border-radius: 5px;  backdrop-filter: blur(10px);">
                     <form action="{% url 'order:card_add' product.id %}" method="post">
                         {% csrf_token %}
                         {% if product.economic %}
