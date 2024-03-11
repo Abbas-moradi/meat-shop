@@ -30,7 +30,9 @@
             {% for product in products %}
             <div class="col mb-3 " style="font-size:small; padding-top: 10px;">
                 <div class="card h-100 text-center text-white" style="background-color: rgba(255, 0, 0, 0.050); padding: 5px; border-radius: 5px;  backdrop-filter: blur(10px);">
-                    <form action="{% url 'order:card_add' product.id %}" method="post">
+                    <form action="{% url 'order:card_add' product.id %}" method="post" >
+                        <p class="text-danger">برای دیدن جزئیات روی شماره رسید <button class="btn btn-info">.</button> کلیک کنید. سفارشات درحالت پرداخت نشده را میتوانید، پرداخت و دریافت کنید.  </p>
+
                         {% csrf_token %}
                         {% if product.economic %}
                         <!-- Sale badge-->

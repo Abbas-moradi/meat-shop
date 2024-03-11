@@ -33,6 +33,7 @@ class Register(View):
     success_tem = 'inc/reg-done.html'
 
     def get(self, request):
+        messages.info(request, 'لطفا زبان نوشتن را روی حالت انگلیسی قرار دهید')
         return render(request, self.reg_temp)
     
     def post(self, request):
